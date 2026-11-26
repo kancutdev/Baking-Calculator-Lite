@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Peralatan Baking Pilihan - Baking Calculator Lite</title>
+  
+  <meta name="description" content="Koleksi rekomendasi peralatan baking pilihan Shopee untuk usaha kue dan bakery. Timbangan digital, mixer, oven, loyang, dan baking tools berkualitas.">
+  <meta name="keywords" content="rekomendasi alat baking shopee, timbangan kue digital, mixer roti terbaik, loyang brownies sekat, spatula silikon tahan panas">
+  <meta name="theme-color" content="#FAF6F0">
+  <link rel="canonical" href="./products.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Peralatan Baking Pilihan - Bikin Baking Lebih Praktis!">
+  <meta property="og:description" content="Temukan perlengkapan baking pilihan untuk membantu pekerjaan di dapur lebih mudah, presisi, dan efisien.">
+  <meta property="og:image" content="assets/icons/icon-512.png">
+  <meta property="og:url" content="./products.html">
+
+  <!-- PWA Manifest & Favicon -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" aria-label="Baking Calculator Lite Beranda">
+        <img src="assets/logo/logo.svg" alt="Logo Baking Calculator Lite" class="brand-logo-img" width="44" height="44">
+        <div class="brand-text-group">
+          <div class="brand-name">
+            Baking Calculator <span class="brand-badge">LITE</span>
+          </div>
+          <span class="brand-sub">Hitung Modal & HPP Kue</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Menu Utama">
+        <a href="index.html" class="nav-link">Kalkulator HPP</a>
+        <a href="products.html" class="nav-link active">Peralatan Baking</a>
+        <a href="about.html" class="nav-link">Tentang Aplikasi</a>
+      </nav>
+
+      <!-- Nav Extra -->
+      <div class="nav-extra">
+        <span class="status-pill online" id="network-status">Online</span>
+        <button type="button" class="mobile-nav-toggle" id="mobile-toggle" aria-label="Buka Menu Navigasi">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- AFFILIATE HERO BANNER -->
+    <section class="section" style="padding-top: 3rem; padding-bottom: 1.5rem;">
+      <div class="container">
+        <div class="affiliate-header-banner">
+          <span class="section-pill">Koleksi Shopee Pilihan</span>
+          <h1 class="hero-title" style="font-size: 2.5rem; margin-bottom: 0.75rem;">
+            Bikin Baking Lebih Praktis!
+          </h1>
+          <p class="hero-desc" style="max-width: 650px; margin: 0 auto 1.5rem;">
+            Temukan perlengkapan baking pilihan untuk membantu pekerjaan di dapur lebih mudah, presisi, dan efisien.
+          </p>
+
+          <!-- Affiliate Disclosure Banner -->
+          <div class="affiliate-disclosure-banner" style="max-width: 750px; margin: 0 auto;">
+            <p>
+              ℹ️ <strong>Transparansi Afiliasi:</strong> Sebagian tautan produk merupakan tautan afiliasi Shopee. Kami dapat menerima komisi dari pembelian melalui tautan tersebut tanpa biaya tambahan bagi Anda.
+            </p>
+          </div>
+        </div>
+
+        <!-- SEARCH & REFRESH CONTROLS -->
+        <div class="affiliate-controls">
+          <div class="search-box-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" id="search-products" class="input-text search-input" placeholder="Cari timbangan, mixer, spatula, loyang...">
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <span id="product-count-text" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">
+              Memuat katalog...
+            </span>
+
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-refresh-products" title="Cek pembaruan katalog terbaru dari server">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+              </svg>
+              <span>Perbarui Produk</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="font-size: 0.775rem; color: var(--text-muted); margin-bottom: 1.25rem;" id="last-updated-text">
+          Memeriksa memori perangkat...
+        </div>
+
+        <!-- CATEGORY CHIPS SCROLLER -->
+        <div class="category-chips-wrapper" id="category-chips-list" aria-label="Filter Kategori Produk">
+          <!-- Dynamic category chips -->
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div class="products-grid" id="affiliate-products-grid">
+          <!-- Dynamic Product Cards Loaded by products-page.js -->
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Bottom Bar for Mobile -->
+  <div class="mobile-bottom-bar" id="mobile-bottom-bar">
+    <a href="index.html#section-calculator" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      <span>Kalkulator</span>
+    </a>
+    <a href="products.html" class="mobile-bottom-item active">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Peralatan</span>
+    </a>
+    <a href="about.html" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <span>Tentang</span>
+    </a>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Baking Calculator Lite</h4>
+          <p class="footer-desc">
+            Kurasi perlengkapan dapur dan baking terbaik dari Shopee untuk membantu efisiensi dan estetika dapur usaha kue Anda.
+          </p>
+          <div>
+            <a href="https://www.tiktok.com/@bang_doned" target="_blank" rel="noopener noreferrer" class="btn-tiktok">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+              <span>Ikuti di TikTok @bang_doned</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Navigasi</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#section-calculator">Kalkulator HPP</a></li>
+            <li><a href="products.html">Etalase Shopee</a></li>
+            <li><a href="about.html">Tentang Aplikasi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Etika & Kemitraan</h5>
+          <ul class="footer-links">
+            <li><a href="about.html#affiliate">Kebijakan Afiliasi</a></li>
+            <li><a href="about.html#privacy">Privasi Data</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Baking Calculator Lite.
+        </div>
+        <div>
+          Seluruh tautan diarahkan secara resmi ke platform Shopee Indonesia.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="affiliate-config.js"></script>
+  <script src="analytics-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/affiliate.js"></script>
+  <script src="js/products-page.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('ServiceWorker registered:', reg.scope))
+          .catch(err => console.warn('ServiceWorker registration failed:', err));
+      });
+    }
+
+    const mobBtn = document.getElementById('mobile-toggle');
+    const mobMenu = document.getElementById('nav-menu');
+    if (mobBtn && mobMenu) {
+      mobBtn.addEventListener('click', () => {
+        mobMenu.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>

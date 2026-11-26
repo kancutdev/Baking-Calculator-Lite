@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Baking Calculator Lite - Test Suite</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #FAF6F0; padding: 2rem; color: #2C1810; }
+    h1 { color: #4A2E18; }
+    .test-summary { font-size: 1.25rem; font-weight: bold; margin: 1rem 0; padding: 1rem; border-radius: 8px; }
+    .all-passed { background: #E8F6F4; color: #2A9D8F; border: 2px solid #2A9D8F; }
+    .has-failed { background: #FEECEF; color: #D90429; border: 2px solid #D90429; }
+    .test-case { margin: 8px 0; padding: 10px 14px; border-radius: 6px; background: #FFFDF9; border: 1px solid #EAD7C5; display: flex; justify-content: space-between; }
+    .pass { border-left: 5px solid #2A9D8F; }
+    .fail { border-left: 5px solid #D90429; background: #FFF5F5; }
+    .badge { font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
+    .badge-pass { background: #2A9D8F; color: white; }
+    .badge-fail { background: #D90429; color: white; }
+  </style>
+</head>
+<body>
+  <h1>🧪 Baking Calculator Lite - Automated Test Runner</h1>
+  <div id="test-summary" class="test-summary">Menjalankan pengujian...</div>
+  <div id="test-results"></div>
+
+  <!-- Load Modules -->
+  <script src="affiliate-config.js"></script>
+  <script src="analytics-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/affiliate.js"></script>
+
+  <script>
+    const results = [];
+    let passed = 0;
+    let failed = 0;
+
+    function assert(desc, condition, details = '') {
+      if (condition) {
+        passed++;
+        results.push({ desc, status: 'PASS', details });
+      } else {
+        failed++;
+        results.push({ desc, status: 'FAIL', details });
+      }
+    }
+
+    function runTests() {
+      // ==========================================
+      // GROUP 1: UTILS & FORMATTING
+      // ==========================================
+      assert('Utils.formatRupiah memformat angka 125000 ke "Rp 125.000"', 
+        Utils.formatRupiah(125000) === 'Rp 125.000');
+      assert('Utils.formatRupiah memformat angka 8500 ke "Rp 8.500"', 
+        Utils.formatRupiah(8500) === 'Rp 8.500');
+      assert('Utils.formatRupiah menangani 0 dengan benar', 
+        Utils.formatRupiah(0) === 'Rp 0');
+      assert('Utils.formatRupiah menangani nilai negatif', 
+        Utils.formatRupiah(-5000) === '-Rp 5.000');
+
+      // Satuan & Konversi
+      const convKgG = Utils.getConversionRatio('g', 'kg');
+      assert('Konversi g ke kg memiliki rasio 0.001', convKgG.compatible && Math.abs(convKgG.ratio - 0.001) < 0.000001);
+
+      const convLml = Utils.getConversionRatio('ml', 'l');
+      assert('Konversi ml ke L memiliki rasio 0.001', convLml.compatible && Math.abs(convLml.ratio - 0.001) < 0.000001);
+
+      const convIncompatible = Utils.getConversionRatio('g', 'ml');
+      assert('Konversi g ke ml ditandai tidak kompatibel', !convIncompatible.compatible);
+
+      // ==========================================
+      // GROUP 2: KALKULATOR HPP
+      // ==========================================
+      // Uji 1: Satu Bahan
+      const resSingle = Calculator.calculateTotal({
+        productName: 'Roti Tawar',
+        yieldQty: 1,
+        yieldUnit: 'Pcs',
+        ingredients: [
+          { name: 'Tepung Terigu', usageQty: 250, usageUnit: 'g', purchaseQty: 1, purchaseUnit: 'kg', purchasePrice: 12000 }
+        ],
+        additionalCosts: [],
+        targetMargin: 0,
+        roundMode: 'none'
+      });
+      // 250g dari 1000g @ 12.000 = 3.000
+      assert('Uji satu bahan menghasilkan total HPP 3.000', resSingle.totalHppBatch === 3000);
+
+      // Uji 2: Banyak Bahan
+      const resMulti = Calculator.calculateTotal({
+        productName: 'Kue Bolu',
+        yieldQty: 10,
+        yieldUnit: 'Slice',
+        ingredients: [
+          { name: 'Tepung', usageQty: 200, usageUnit: 'g', purchaseQty: 1, purchaseUnit: 'kg', purchasePrice: 15000 }, // 3.000
+          { name: 'Gula', usageQty: 150, usageUnit: 'g', purchaseQty: 1, purchaseUnit: 'kg', purchasePrice: 18000 },   // 2.700
+          { name: 'Mentega', usageQty: 100, usageUnit: 'g', purchaseQty: 200, purchaseUnit: 'g', purchasePrice: 20000 } // 10.000
+        ],
+        additionalCosts: [],
+        targetMargin: 0,
+        roundMode: 'none'
+      });
+      // 3000 + 2700 + 10000 = 15.700
+      assert('Uji banyak bahan menghasilkan total bahan 15.700', resMulti.totalIngredientsCost === 15700);
+
+      // Uji 3: Biaya Tambahan
+      const resWithCost = Calculator.calculateTotal({
+        productName: 'Kue Bolu',
+        yieldQty: 10,
+        yieldUnit: 'Slice',
+        ingredients: [
+          { name: 'Tepung', usageQty: 200, usageUnit: 'g', purchaseQty: 1, purchaseUnit: 'kg', purchasePrice: 15000 } // 3.000
+        ],
+        additionalCosts: [
+          { name: 'Kemasan Box', amount: 2000 },
+          { name: 'Gas Oven', amount: 5000 }
+        ],
+        targetMargin: 0,
+        roundMode: 'none'
+      });
+      assert('Biaya tambahan dihitung dalam total HPP batch (3000 + 7000 = 10000)', resWithCost.totalHppBatch === 10000);
+
+      // Uji 4: Hasil Produksi Berbeda (HPP per unit)
+      assert('HPP per unit dihitung akurat (10.000 / 10 = 1.000)', resWithCost.hppPerUnit === 1000);
+
+      // Uji 5: Target Margin (20%, 30%, 40%, 50%)
+      // Rumus: Harga = HPP / (1 - Margin)
+      // HPP = 6000:
+      // Margin 20%: 6000 / 0.8 = 7500
+      // Margin 30%: 6000 / 0.7 = 8571.42...
+      // Margin 40%: 6000 / 0.6 = 10000
+      // Margin 50%: 6000 / 0.5 = 12000
+      const calcMargin = (m) => Calculator.calculateTotal({
+        yieldQty: 1,
+        ingredients: [{ usageQty: 1, usageUnit: 'pcs', purchaseQty: 1, purchaseUnit: 'pcs', purchasePrice: 6000 }],
+        targetMargin: m,
+        roundMode: 'none'
+      });
+
+      assert('Margin 20% menghasilkan harga jual 7.500', calcMargin(20).recommendedPrice === 7500);
+      assert('Margin 40% menghasilkan harga jual 10.000', calcMargin(40).recommendedPrice === 10000);
+      assert('Margin 50% menghasilkan harga jual 12.000', calcMargin(50).recommendedPrice === 12000);
+
+      // Uji 6: Harga Jual Manual
+      const resManual = Calculator.calculateTotal({
+        yieldQty: 1,
+        ingredients: [{ usageQty: 1, usageUnit: 'pcs', purchaseQty: 1, purchaseUnit: 'pcs', purchasePrice: 6000 }],
+        isManualPrice: true,
+        manualPrice: 10000
+      });
+      assert('Harga jual manual menghitung keuntungan per unit 4.000', resManual.manualEvaluation.profitPerUnit === 4000);
+      assert('Harga jual manual menghitung margin aktual 40%', resManual.manualEvaluation.actualMarginPercent === 40);
+
+      // Uji 7: Pembulatan Harga Jual ke Atas (Ceil)
+      // 8571 dibulatkan ke atas Rp100 -> 8600
+      // 8571 dibulatkan ke atas Rp500 -> 9000
+      // 8571 dibulatkan ke atas Rp1000 -> 9000
+      assert('Pembulatan Ceil Rp100 untuk 8571 adalah 8600', Calculator.roundSellingPrice(8571, '100') === 8600);
+      assert('Pembulatan Ceil Rp500 untuk 8571 adalah 9000', Calculator.roundSellingPrice(8571, '500') === 9000);
+      assert('Pembulatan Ceil Rp1000 untuk 8571 adalah 9000', Calculator.roundSellingPrice(8571, '1000') === 9000);
+
+      // Uji 8: Jumlah Pembelian Nol (Mencegah NaN / Infinity)
+      const resDivZero = Calculator.calculateIngredientCost({
+        usageQty: 100, purchaseQty: 0, purchasePrice: 10000
+      });
+      assert('Pembelian 0 ditangani aman tanpa NaN / Infinity', resDivZero.cost === 0 && resDivZero.error !== null);
+
+      // Uji 9: Jumlah Produksi Nol
+      const resZeroYield = Calculator.calculateTotal({
+        yieldQty: 0,
+        ingredients: [{ usageQty: 1, usageUnit: 'pcs', purchaseQty: 1, purchaseUnit: 'pcs', purchasePrice: 5000 }]
+      });
+      assert('Hasil produksi 0 otomatis di-clamp aman ke 1', resZeroYield.yieldQty === 1 && !isNaN(resZeroYield.hppPerUnit));
+
+      // Uji 10: Input Kosong
+      const resEmpty = Calculator.calculateTotal({});
+      assert('Input kosong menghasilkan nilai 0 aman tanpa crash', resEmpty.totalHppBatch === 0);
+
+      // Uji 11: Input Negatif
+      const resNegative = Calculator.calculateIngredientCost({
+        usageQty: -50, purchaseQty: 100, purchasePrice: 10000
+      });
+      assert('Input negatif ditolak aman dengan pesan error', resNegative.cost === 0 && resNegative.error !== null);
+
+      // Uji 12: Margin >= 100%
+      const valMargin = Validation.validateMargin(100);
+      assert('Margin 100% dinyatakan tidak valid', !valMargin.isValid);
+
+      // Uji 13: Nominal Besar (Miliaran)
+      const resBig = Calculator.calculateTotal({
+        yieldQty: 1000,
+        ingredients: [
+          { usageQty: 1000, usageUnit: 'kg', purchaseQty: 1, purchaseUnit: 'kg', purchasePrice: 5000000 } // 5 Miliar
+        ]
+      });
+      assert('Perhitungan nominal miliaran akurat (5.000.000.000)', resBig.totalHppBatch === 5000000000);
+
+      // ==========================================
+      // GROUP 3: VALIDASI & AFFILIATE SHOPEE
+      // ==========================================
+      // Uji URL Shopee
+      assert('URL Shopee resmi valid (https://shopee.co.id/product/123)', 
+        Validation.isValidShopeeUrl('https://shopee.co.id/product/123'));
+      assert('URL Shopee shortlink valid (https://shope.ee/abcde)', 
+        Validation.isValidShopeeUrl('https://shope.ee/abcde'));
+      assert('URL Marketplace lain (Tokopedia/Lazada) ditolak', 
+        !Validation.isValidShopeeUrl('https://tokopedia.com/product/123'));
+      assert('URL tanpa HTTPS ditolak', 
+        !Validation.isValidShopeeUrl('http://shopee.co.id/product/123'));
+
+      // Uji Produk Affiliate: active=true vs active=false
+      const pActive = { id: '1', name: 'Timbangan', shopee_url: 'https://shopee.co.id/item', active: true };
+      const pInactive = { id: '2', name: 'Mixer', shopee_url: 'https://shopee.co.id/item', active: false };
+      assert('Produk active=true lolos validasi', Validation.validateAffiliateProduct(pActive).isValid);
+      assert('Produk active=false ditolak tampil', !Validation.validateAffiliateProduct(pInactive).isValid);
+
+      // Uji Produk dengan URL kosong
+      const pNoUrl = { id: '3', name: 'Oven', shopee_url: '', active: true };
+      assert('Produk dengan URL kosong ditolak', !Validation.validateAffiliateProduct(pNoUrl).isValid);
+
+      // Uji Card Generator DOM
+      const cardEl = AffiliateManager.createProductCard({
+        id: 'test_card',
+        name: 'Spatula Silikon',
+        description: 'Bahan silikon food-grade',
+        category: 'Spatula dan whisk',
+        image: '',
+        price: 25000,
+        shopee_url: 'https://shopee.co.id/item-123',
+        label: 'Wajib Punya',
+        active: true
+      });
+      assert('Card generator menghasilkan elemen artikel produk', cardEl && cardEl.tagName === 'ARTICLE');
+      assert('Card generator memiliki tombol tautan Shopee', cardEl.querySelector('.btn-shopee') !== null);
+
+      // ==========================================
+      // GROUP 4: STORAGE & RIWAYAT (LOCAL STORAGE)
+      // ==========================================
+      Storage.clearHistory();
+      assert('Riwayat awal kosong', Storage.getHistory().length === 0);
+
+      for (let i = 1; i <= 15; i++) {
+        Storage.saveToHistory({
+          productName: `Resep Kue ${i}`,
+          yieldQty: 10,
+          yieldUnit: 'Pcs',
+          hppPerUnit: 2000,
+          recommendedPrice: 3500,
+          targetMargin: 40
+        });
+      }
+      const historyList = Storage.getHistory();
+      assert('Riwayat dibatasi maksimal 10 item terbaru', historyList.length === 10);
+      assert('Item teratas adalah item yang paling terakhir disimpan (Resep Kue 15)', historyList[0].productName === 'Resep Kue 15');
+
+      // Draft Storage
+      Storage.saveDraft({ testKey: 'baking_lite_value' });
+      assert('Draft berhasil disimpan dan dimuat', Storage.loadDraft().testKey === 'baking_lite_value');
+
+      // ==========================================
+      // GROUP 5: ANALYTICS & PRIVACY PROTECTION (GA4)
+      // ==========================================
+      assert('Analytics modul terdefinisi', typeof Analytics !== 'undefined');
+      assert('Analytics.isValidMeasurementId menerima format valid "G-ABC123XYZ0"', 
+        Analytics.isValidMeasurementId('G-ABC123XYZ0') === true);
+      assert('Analytics.isValidMeasurementId menolak string kosong', 
+        Analytics.isValidMeasurementId('') === false);
+      assert('Analytics.isValidMeasurementId menolak placeholder "G-XXXXXXXXXX"', 
+        Analytics.isValidMeasurementId('G-XXXXXXXXXX') === false);
+      assert('Analytics.isValidMeasurementId menolak format UA- lama', 
+        Analytics.isValidMeasurementId('UA-12345678-1') === false);
+      assert('Analytics tidak aktif jika GA_MEASUREMENT_ID belum diisi', 
+        Analytics.isConfigured() === false);
+
+      // Pastikan fungsi tracking aman dipanggil dan tidak menghasilkan throw error
+      let noErrorTracking = true;
+      try {
+        Analytics.trackPageView('Test Beranda', '/index.html');
+        Analytics.trackCalculatorUsed({ calculator_type: 'hpp_standard', product_category: 'Pcs' });
+        Analytics.trackAffiliateClick({
+          itemId: 'bcl-001',
+          itemName: 'Timbangan Digital',
+          itemCategory: 'Timbangan digital',
+          placement: 'homepage_product_gallery',
+          linkType: 'shopee'
+        });
+      } catch (e) {
+        noErrorTracking = false;
+      }
+      assert('Panggilan tracking saat Analytics non-aktif berjalan aman tanpa error/exception', noErrorTracking);
+
+      // ==========================================
+      // GROUP 6: AFFILIATE PRODUCT GALLERY & THUMBNAILS
+      // ==========================================
+      const sampleProdA = {
+        id: 'test-prod-a',
+        name: 'Timbangan Digital Presisi',
+        category: 'Timbangan digital',
+        image: 'assets/images/placeholder-product.svg',
+        price: 65000,
+        shopee_url: 'https://shopee.co.id/product-a-affiliate?utm_source=bclite',
+        label: 'Wajib Punya',
+        active: true
+      };
+
+      const sampleProdB = {
+        id: 'test-prod-b',
+        name: 'Loyang Sekat Brownies',
+        category: 'Loyang',
+        image: 'assets/images/placeholder-product.svg',
+        price: 75000,
+        shopee_url: 'https://shope.ee/product-b-affiliate?ref=123',
+        label: 'Pilihan Baking',
+        active: true
+      };
+
+      const thumbA = AffiliateManager.createGalleryThumbnail(sampleProdA, 'homepage_product_gallery');
+      const thumbB = AffiliateManager.createGalleryThumbnail(sampleProdB, 'homepage_product_gallery');
+
+      assert('createGalleryThumbnail menghasilkan elemen article dengan kelas affiliate-thumb-card', 
+        thumbA && thumbA.className.includes('affiliate-thumb-card'));
+      
+      const linkA = thumbA.querySelector('.affiliate-thumb-link');
+      const linkB = thumbB.querySelector('.affiliate-thumb-link');
+
+      assert('Thumbnail A memiliki elemen tautan dengan target _blank dan rel noopener noreferrer',
+        linkA && linkA.getAttribute('target') === '_blank' && linkA.getAttribute('rel') === 'noopener noreferrer');
+      
+      assert('Link Produk A mengarah ke URL unik Produk A beserta seluruh parameter tracking',
+        linkA && linkA.getAttribute('href') === sampleProdA.shopee_url);
+
+      assert('Link Produk B mengarah ke URL unik Produk B',
+        linkB && linkB.getAttribute('href') === sampleProdB.shopee_url);
+
+      assert('Tiap thumbnail memiliki link unik yang berbeda (Link A !== Link B)',
+        linkA.getAttribute('href') !== linkB.getAttribute('href'));
+
+      const imgA = thumbA.querySelector('.thumb-img');
+      const titleA = thumbA.querySelector('.thumb-title');
+      assert('Gambar thumbnail dan nama produk keduanya berada di dalam tautan yang dapat diklik',
+        linkA.contains(imgA) && linkA.contains(titleA));
+
+      const priceA = thumbA.querySelector('.thumb-price');
+      assert('Harga produk diformat dengan benar pada thumbnail',
+        priceA && priceA.textContent === 'Rp 65.000');
+
+      const badgeA = thumbA.querySelector('.thumb-badge');
+      assert('Label pilihan ditampilkan jika ada pada data',
+        badgeA && badgeA.textContent === 'Wajib Punya');
+
+      const shopeeTagA = thumbA.querySelector('.thumb-shopee-tag');
+      assert('Indikator Shopee bernuansa natural dan tidak menggunakan tombol CTA besar agresif',
+        shopeeTagA !== null && !thumbA.querySelector('.btn-shopee'));
+
+      // Tampilkan Hasil di DOM
+      renderSummary();
+    }
+
+    function renderSummary() {
+      const summaryEl = document.getElementById('test-summary');
+      const listEl = document.getElementById('test-results');
+
+      summaryEl.textContent = `Total: ${results.length} | Berhasil: ${passed} | Gagal: ${failed}`;
+      summaryEl.className = `test-summary ${failed === 0 ? 'all-passed' : 'has-failed'}`;
+
+      listEl.innerHTML = results.map(r => `
+        <div class="test-case ${r.status === 'PASS' ? 'pass' : 'fail'}">
+          <span>${r.desc}</span>
+          <span class="badge ${r.status === 'PASS' ? 'badge-pass' : 'badge-fail'}">${r.status}</span>
+        </div>
+      `).join('');
+
+      console.log(`TEST RESULTS: PASSED=${passed}, FAILED=${failed}, TOTAL=${results.length}`);
+    }
+
+    window.onload = runTests;
+  </script>
+</body>
+</html>

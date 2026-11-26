@@ -1,0 +1,674 @@
+/* ==========================================================================
+   BAKING CALCULATOR LITE - RESPONSIVE STYLESHEET
+   Target Breakpoints: 360px, 375px, 390px, 430px, 768px, 1024px, 1440px
+   Mobile-First & Fluid Layout
+   ========================================================================== */
+
+/* Laptop & Large Desktop (1024px - 1440px) */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-illustration {
+    max-width: 380px;
+  }
+
+  .results-main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-main-grid .stat-box.highlight {
+    grid-column: span 2;
+  }
+
+  .results-sub-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+
+  .pro-promo-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
+/* Mobile Large & Medium (480px - 767px) */
+@media (max-width: 767px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .nav-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    gap: 8px;
+    height: 64px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .brand-link {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+
+  .brand-logo-img {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+  }
+
+  .brand-text-group {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-badge {
+    font-size: 0.58rem;
+    padding: 1px 5px;
+  }
+
+  .brand-sub {
+    display: none !important;
+  }
+
+  .nav-extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Status indicator dot di layar mobile agar tidak mendesak tombol hamburger */
+  .status-pill {
+    font-size: 0 !important;
+    padding: 0 !important;
+    width: 10px !important;
+    height: 10px !important;
+    min-width: 10px !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    border: 2px solid #FFFFFF !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12) !important;
+    margin: 0 !important;
+  }
+
+  .status-pill.online {
+    background-color: var(--success) !important;
+    box-shadow: 0 0 6px var(--success), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .status-pill.offline {
+    background-color: var(--warning) !important;
+    box-shadow: 0 0 6px var(--warning), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .status-pill::before {
+    display: none !important;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-surface);
+    flex-direction: column;
+    padding: 1.5rem;
+    border-bottom: 1.5px solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-120%);
+    transition: transform var(--transition-normal);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 6px !important;
+    flex-shrink: 0 !important;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .hero-section {
+    padding: 2rem 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* Form Spans on Mobile */
+  .span-half, .span-third, .span-two-thirds {
+    grid-column: span 12;
+  }
+
+  .input-text, .select-unit, .select-input {
+    height: 44px;
+  }
+
+  /* Ingredients Rows Stack on Mobile */
+  .row-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cost-row-grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .cost-delete-wrapper {
+    align-self: flex-end;
+  }
+
+  /* Results on Mobile */
+  .results-card {
+    padding: 1.25rem;
+  }
+
+  .results-main-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .results-main-grid .stat-box.highlight {
+    grid-column: span 1;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+  }
+
+  .results-sub-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .manual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Calculator Action Buttons on Mobile */
+  .calculator-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions-primary, .actions-secondary {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .actions-primary .btn, .actions-secondary .btn {
+    width: 100%;
+  }
+
+  /* Affiliate on Mobile */
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .affiliate-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Affiliate Thumbnail Gallery - Horizontal Scroll with Scroll-Snap on Mobile */
+  .affiliate-gallery-scroll {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    gap: 12px !important;
+    padding: 4px 4px 14px 4px !important;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-caramel-light) transparent;
+  }
+
+  .affiliate-gallery-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .affiliate-gallery-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .affiliate-gallery-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: var(--radius-full);
+  }
+
+  .affiliate-thumb-card {
+    flex: 0 0 148px !important;
+    min-width: 148px !important;
+    max-width: 160px !important;
+    scroll-snap-align: start !important;
+  }
+
+  .gallery-header-row {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .gallery-title {
+    font-size: 1.25rem;
+  }
+
+  .gallery-empty-fallback {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .search-box-wrapper {
+    max-width: 100%;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Sticky Bottom Navigation di layar mobile */
+  .mobile-bottom-bar {
+    display: flex;
+  }
+
+  body {
+    padding-bottom: 64px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-bottom-bar {
+    display: none !important;
+  }
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Mobile Header & Controls Polish (<= 480px) */
+@media (max-width: 480px) {
+  .site-header {
+    height: 60px;
+  }
+
+  .nav-container {
+    height: 60px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .brand-link {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+
+  .brand-logo-img {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 8px;
+  }
+
+  .brand-text-group {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-badge {
+    font-size: 0.58rem;
+    padding: 1px 5px;
+  }
+
+  .brand-sub {
+    display: none !important;
+  }
+
+  .nav-extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Status indicator dot di mobile agar tidak mendesak tombol hamburger */
+  .status-pill {
+    font-size: 0 !important;
+    padding: 0 !important;
+    width: 10px !important;
+    height: 10px !important;
+    min-width: 10px !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    border: 2px solid #FFFFFF !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12) !important;
+    margin: 0 !important;
+  }
+
+  .status-pill.online {
+    background-color: var(--success) !important;
+    box-shadow: 0 0 6px var(--success), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .status-pill.offline {
+    background-color: var(--warning) !important;
+    box-shadow: 0 0 6px var(--warning), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .status-pill::before {
+    display: none !important;
+  }
+
+  .mobile-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 6px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .hero-tag {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+
+  .hero-illustration {
+    max-width: 250px;
+    margin: 1.25rem auto 0;
+  }
+
+  .preset-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .btn-preset-recipe {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.825rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Mobile Small (360px - 430px) */
+@media (max-width: 430px) {
+  html {
+    font-size: 14px;
+  }
+
+  .brand-name {
+    font-size: 0.975rem;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
+    line-height: 1.25;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .stat-value {
+    font-size: 1.45rem;
+  }
+
+  .results-sub-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sub-stat-item {
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 6px;
+  }
+
+  .sub-stat-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .history-item-stats {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .input-prefix-wrapper .input-text {
+    padding-left: 36px;
+  }
+
+  .input-prefix {
+    left: 10px;
+    font-size: 0.85rem;
+  }
+
+  /* Sticky Bottom Navigation for Mobile */
+  .mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 253, 249, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    z-index: 90;
+    box-shadow: 0 -4px 12px rgba(44, 24, 16, 0.05);
+  }
+
+  .mobile-bottom-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .mobile-bottom-item.active, .mobile-bottom-item:hover {
+    color: var(--color-caramel);
+  }
+
+  /* Padding bottom agar konten tidak tertutup bottom bar */
+  body {
+    padding-bottom: 64px;
+  }
+
+  .toast-container {
+    bottom: 74px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .toast {
+    max-width: 100%;
+  }
+}
+
+/* Extra Small (360px & bawah) */
+@media (max-width: 360px) {
+  .nav-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    gap: 4px;
+  }
+
+  .brand-logo-img {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+
+  .brand-name {
+    font-size: 0.86rem;
+  }
+
+  .mobile-nav-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    padding: 4px !important;
+  }
+
+  .hero-title {
+    font-size: 1.42rem;
+    line-height: 1.25;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select-unit {
+    max-width: 100%;
+  }
+
+  .affiliate-thumb-card {
+    flex: 0 0 135px !important;
+    min-width: 135px !important;
+  }
+}

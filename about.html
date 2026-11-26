@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Tentang & Panduan HPP - Baking Calculator Lite</title>
+  
+  <meta name="description" content="Pelajari cara menghitung Harga Pokok Produksi (HPP) kue, perbedaan margin vs markup, dan komitmen privasi Baking Calculator Lite.">
+  <meta name="theme-color" content="#FAF6F0">
+  <link rel="canonical" href="./about.html">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link">
+        <img src="assets/logo/logo.svg" alt="Logo Baking Calculator Lite" class="brand-logo-img" width="44" height="44">
+        <div class="brand-text-group">
+          <div class="brand-name">
+            Baking Calculator <span class="brand-badge">LITE</span>
+          </div>
+          <span class="brand-sub">Hitung Modal & HPP Kue</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Kalkulator HPP</a>
+        <a href="products.html" class="nav-link">Peralatan Baking</a>
+        <a href="about.html" class="nav-link active">Tentang Aplikasi</a>
+      </nav>
+
+      <div class="nav-extra">
+        <span class="status-pill online" id="network-status">Online</span>
+        <button type="button" class="mobile-nav-toggle" id="mobile-toggle" aria-label="Buka Menu Navigasi">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      
+      <!-- ABOUT APP -->
+      <div class="section-title-wrap">
+        <span class="section-pill">Tentang Proyek</span>
+        <h1 class="section-title">Baking Calculator Lite</h1>
+        <p class="section-subtitle">
+          "Hitung Modal. Tentukan Harga. Maksimalkan Profit."
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 2.5rem;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 1rem;">
+          Misi Membantu UMKM Bakery & Dapur Rumahan
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+          Banyak pemilik usaha kue rumahan, penjual donat, brownies, bolu, cookies, dan aneka dessert sering merasa dagangannya ramai tetapi di akhir bulan tidak ada sisa keuntungan. Salah satu penyebab utamanya adalah kesalahan dalam menghitung HPP (Harga Pokok Produksi) dan salah membedakan antara <strong>markup</strong> dan <strong>margin keuntungan</strong>.
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.8;">
+          <strong>Baking Calculator Lite</strong> hadir sebagai aplikasi web yang ringan, cepat, tanpa login, dan dapat berjalan secara offline untuk membantu Anda menghitung biaya modal bahan hingga per gram, memperhitungkan biaya operasional, dan menentukan harga jual yang aman dan menguntungkan.
+        </p>
+      </div>
+
+      <!-- PANDUAN MATEMATIKA HPP & MARGIN -->
+      <div class="card" style="margin-bottom: 2.5rem;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 1rem;">
+          📐 Rumus Perhitungan Yang Digunakan
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div class="card-subtle">
+            <h4 style="font-weight: 800; color: var(--color-caramel); margin-bottom: 0.5rem;">1. Biaya Bahan Yang Digunakan</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.5rem;">
+              <code>Biaya Bahan = Harga Beli × (Jumlah Pemakaian / Jumlah Pembelian)</code>
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Sistem secara otomatis mengonversi satuan yang sejenis (seperti kilogram ke gram, atau liter ke mililiter).
+            </p>
+          </div>
+
+          <div class="card-subtle">
+            <h4 style="font-weight: 800; color: var(--color-caramel); margin-bottom: 0.5rem;">2. HPP per Porsi / Potong (Yield Unit)</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.5rem;">
+              <code>HPP per Unit = (Total Biaya Bahan + Total Biaya Operasional) / Jumlah Hasil Produksi</code>
+            </p>
+          </div>
+
+          <div class="card-subtle">
+            <h4 style="font-weight: 800; color: var(--color-caramel); margin-bottom: 0.5rem;">3. Rekomendasi Harga Jual Berdasarkan Margin (Bukan Markup!)</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.5rem;">
+              <code>Harga Jual = HPP per Unit / (1 - Target Margin)</code>
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+              Contoh: Jika HPP per potong kue adalah Rp6.000 dan Anda menginginkan margin 40% (0.4), maka pembaginya adalah (1 - 0.4) = 0.6. Harga jual adalah Rp6.000 / 0.6 = <strong>Rp10.000</strong>. Saat Anda memberi diskon promo 20%, Anda tetap mengantongi untung, bukan merugi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSPARANSI AFILIASI SHOPEE -->
+      <div class="card" id="affiliate" style="margin-bottom: 2.5rem;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 1rem;">
+          🛍️ Kebijakan Afiliasi Shopee
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+          Untuk mendukung biaya pemeliharaan dan pengembangan aplikasi ini agar tetap 100% gratis dan bebas iklan pop-up yang mengganggu, kami menyajikan rekomendasi peralatan baking melalui program Afiliasi Shopee resmi.
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.8;">
+          Jika Anda mengeklik tautan rekomendasi dan melakukan pembelian di Shopee, kami mungkin menerima komisi kecil dari Shopee. <strong>Hal ini tidak menambah harga belanja Anda sama sekali</strong>. Seluruh harga di Shopee tetap sesuai dengan harga promo dan ketentuan toko yang bersangkutan.
+        </p>
+      </div>
+
+      <!-- PRIVASI PENGGUNA -->
+      <div class="card" id="privacy">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 1rem;">
+          🔒 Privasi & Penyimpanan Data
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+          Kerahasiaan resep dan modal usaha Anda adalah prioritas utama kami.
+        </p>
+        <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+          <li>Aplikasi ini <strong>tidak menggunakan server backend</strong> dan <strong>tidak memiliki database online</strong>.</li>
+          <li>Seluruh draft perhitungan dan riwayat HPP Anda disimpan langsung di browser perangkat Anda sendiri menggunakan <code>LocalStorage</code>.</li>
+          <li>Data resep tidak pernah dikirimkan ke pihak mana pun.</li>
+          <li>Anda dapat menghapus riwayat kapan saja melalui tombol "Hapus Semua" pada halaman kalkulator.</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Sticky Bottom Bar for Mobile -->
+  <div class="mobile-bottom-bar" id="mobile-bottom-bar">
+    <a href="index.html#section-calculator" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      <span>Kalkulator</span>
+    </a>
+    <a href="products.html" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Peralatan</span>
+    </a>
+    <a href="about.html" class="mobile-bottom-item active">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <span>Tentang</span>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Baking Calculator Lite</h4>
+          <p class="footer-desc">
+            Aplikasi kalkulator HPP praktis untuk UMKM bakery dan pembuat kue rumahan di Indonesia.
+          </p>
+          <div>
+            <a href="https://www.tiktok.com/@bang_doned" target="_blank" rel="noopener noreferrer" class="btn-tiktok">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+              <span>Ikuti di TikTok @bang_doned</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Menu</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Kalkulator HPP</a></li>
+            <li><a href="products.html">Peralatan Baking</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Legalitas</h5>
+          <ul class="footer-links">
+            <li><a href="#affiliate">Afiliasi Shopee</a></li>
+            <li><a href="#privacy">Privasi Data</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Baking Calculator Lite.</div>
+        <div>Maju bersama UMKM Bakery Nusantara.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Analytics Scripts -->
+  <script src="analytics-config.js"></script>
+  <script src="js/analytics.js"></script>
+
+  <script>
+    const mobBtn = document.getElementById('mobile-toggle');
+    const mobMenu = document.getElementById('nav-menu');
+    if (mobBtn && mobMenu) {
+      mobBtn.addEventListener('click', () => {
+        mobMenu.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>

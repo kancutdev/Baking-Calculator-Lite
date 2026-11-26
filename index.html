@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Baking Calculator Lite - Hitung Modal & HPP Usaha Kue Praktis</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Kalkulator HPP kue online gratis untuk usaha bakery dan rumahan. Hitung modal bahan baku, tentukan harga jual dengan target margin keuntungan yang akurat.">
+  <meta name="keywords" content="kalkulator hpp kue, kalkulator hpp baking, hitung modal kue, cara menentukan harga jual kue, kalkulator bakery, hpp donat brownies cookies">
+  <meta name="author" content="Baking Calculator Lite">
+  <meta name="theme-color" content="#FAF6F0">
+  <link rel="canonical" href="./">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Baking Calculator Lite - Hitung Modal. Tentukan Harga. Maksimalkan Profit.">
+  <meta property="og:description" content="Kalkulator HPP khusus pelaku usaha baking & kue rumahan. Hitung modal bahan dan operasional akurat, tentukan harga jual tepat.">
+  <meta property="og:image" content="assets/icons/icon-512.png">
+  <meta property="og:url" content="./">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baking Calculator Lite - Hitung HPP Kue Praktis">
+  <meta name="twitter:description" content="Kalkulator HPP khusus pelaku usaha baking & bakery UMKM. Akurat, cepat, dan offline-ready.">
+  <meta name="twitter:image" content="assets/icons/icon-512.png">
+
+  <!-- PWA Manifest & Favicon -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Baking Calculator Lite",
+    "description": "Kalkulator HPP dan margin harga jual untuk pengusaha kue dan bakery.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" aria-label="Baking Calculator Lite Beranda">
+        <img src="assets/logo/logo.svg" alt="Logo Baking Calculator Lite" class="brand-logo-img" width="44" height="44">
+        <div class="brand-text-group">
+          <div class="brand-name">
+            Baking Calculator <span class="brand-badge">LITE</span>
+          </div>
+          <span class="brand-sub">Hitung Modal & HPP Kue</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Tablet Navigation Menu -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Menu Utama">
+        <a href="index.html" class="nav-link active">Kalkulator HPP</a>
+        <a href="products.html" class="nav-link">Peralatan Baking</a>
+        <a href="about.html" class="nav-link">Tentang Aplikasi</a>
+      </nav>
+
+      <!-- Nav Extra: Status & Mobile Hamburger -->
+      <div class="nav-extra">
+        <span class="status-pill online" id="network-status">Online</span>
+        <button type="button" class="mobile-nav-toggle" id="mobile-toggle" aria-label="Buka Menu Navigasi">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span>🍰</span> Solusi Praktis Usaha Baking
+          </div>
+          <h1 class="hero-title">
+            Hitung Modal. <br>
+            Tentukan Harga. <br>
+            <span class="highlight">Maksimalkan Profit.</span>
+          </h1>
+          <p class="hero-desc">
+            Kalkulator HPP khusus usaha kue. Hitung takaran bahan baku, biaya kemasan, dan operasional dengan presisi. Dapatkan rekomendasi harga jual realistis berdasarkan target margin keuntungan Anda.
+          </p>
+          <div class="hero-actions">
+            <a href="#section-calculator" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+              <span>Mulai Hitung HPP</span>
+            </a>
+            <a href="products.html" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Rekomendasi Alat Baking</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-illustration-wrapper">
+          <img src="assets/images/hero-baking-tools.svg" alt="Ilustrasi Timbangan Digital dan Perlengkapan Baking" class="hero-illustration" width="480" height="360">
+        </div>
+      </div>
+    </section>
+
+    <!-- KALKULATOR HPP SECTION -->
+    <section class="section" id="section-calculator">
+      <div class="container">
+        
+        <div class="section-title-wrap">
+          <span class="section-pill">Kalkulator Akurat</span>
+          <h2 class="section-title">Formulir Perhitungan HPP</h2>
+          <p class="section-subtitle">Masukkan bahan dan biaya operasional untuk menghitung harga pokok per porsi secara otomatis.</p>
+        </div>
+
+        <!-- Pilihan Preset Resep Contoh -->
+        <div class="preset-selector-card">
+          <div class="preset-header">
+            <span class="preset-title">💡 Contoh Resep Simulasi:</span>
+            <span class="preset-sub">Pilih template awal untuk melihat simulasi perhitungan. Dapat diedit sepenuhnya sesuai harga belanja Anda.</span>
+          </div>
+          <div class="preset-buttons">
+            <button type="button" class="btn-preset-recipe active" data-preset="brownies">
+              <span>🍫 Fudgy Brownies (16 Slice)</span>
+            </button>
+            <button type="button" class="btn-preset-recipe" data-preset="donat">
+              <span>🍩 Donat Kentang (12 Pcs)</span>
+            </button>
+            <button type="button" class="btn-preset-recipe" data-preset="cookies">
+              <span>🍪 Choco Chip Cookies (24 Pcs)</span>
+            </button>
+          </div>
+          <p class="preset-disclaimer">
+            <em>*Seluruh nominal dan takaran di atas merupakan contoh simulasi untuk mempermudah pemahaman alur HPP, bukan klaim harga pasar terkini.</em>
+          </p>
+        </div>
+
+        <!-- 1. Informasi Produk -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">🏷️</div>
+              <div>
+                <h3 class="card-title">Informasi Produk Kue</h3>
+                <p class="card-desc">Nama kreasi kue dan jumlah hasil produksi per sekali memanggang (satu batch).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group span-half">
+              <label class="form-label" for="input-product-name">Nama Produk Kue</label>
+              <input type="text" id="input-product-name" class="input-text" placeholder="Contoh: Fudgy Brownies Shiny Crust 20x20">
+              <span class="form-help">Nama kue atau roti yang sedang Anda produksi.</span>
+            </div>
+
+            <div class="form-group span-half">
+              <label class="form-label" for="input-yield-qty">Hasil Produksi Per Batch</label>
+              <div class="input-group">
+                <input type="number" id="input-yield-qty" class="input-text" min="1" step="1" value="16" placeholder="Contoh: 16">
+                <select id="select-yield-unit" class="select-unit">
+                  <option value="Slice" selected>Slice</option>
+                  <option value="Pcs">Pcs</option>
+                  <option value="Box">Box</option>
+                  <option value="Jar">Jar</option>
+                  <option value="Pack">Pack</option>
+                  <option value="Loyang">Loyang</option>
+                  <option value="Custom">Custom...</option>
+                </select>
+              </div>
+              <span class="form-help">Jumlah potongan, loyang, atau wadah yang dihasilkan.</span>
+            </div>
+
+            <div class="form-group span-full" id="group-custom-yield" style="display: none;">
+              <label class="form-label" for="input-custom-yield-unit">Nama Satuan Khusus (Custom)</label>
+              <input type="text" id="input-custom-yield-unit" class="input-text" placeholder="Contoh: Cup, Toples 500g, Botol">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Daftar Bahan Baku -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">🌾</div>
+              <div>
+                <h3 class="card-title">Daftar Bahan Baku Adonan</h3>
+                <p class="card-desc">Konversi otomatis g &harr; kg dan ml &harr; L menghindarkan salah hitung modal.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Ingredients List Container -->
+          <div id="ingredients-list">
+            <!-- Dynamic Rows Generated by app.js -->
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <button type="button" class="btn btn-secondary" id="btn-add-ingredient">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>+ Tambah Bahan Baku</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Biaya Tambahan Operasional -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">⚡</div>
+              <div>
+                <h3 class="card-title">Biaya Tambahan & Operasional</h3>
+                <p class="card-desc">Jangan lupakan kemasan box, stiker, gas oven, listrik mixer, dan tenaga kerja.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Additional Costs Container -->
+          <div id="additional-costs-list">
+            <!-- Dynamic Rows Generated by app.js -->
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <button type="button" class="btn btn-secondary" id="btn-add-cost">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>+ Tambah Biaya Operasional</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Target Margin & Pengaturan Harga Jual -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">📈</div>
+              <div>
+                <h3 class="card-title">Target Margin & Pembulatan Harga</h3>
+                <p class="card-desc">Menggunakan rumus margin keuntungan murni (bukan sekadar markup biasa).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <!-- Slider & Input Margin -->
+            <div class="form-group span-half position-relative">
+              <div class="label-with-info">
+                <label class="form-label" for="input-target-margin">Target Margin Keuntungan (%)</label>
+                <button type="button" class="btn-info-circle" id="btn-info-margin" title="Pelajari cara kerja margin vs markup" aria-label="Penjelasan Rumus Margin">?</button>
+              </div>
+
+              <!-- Popover Edukasi Margin -->
+              <div class="margin-info-popover" id="popover-margin-info" style="display: none;">
+                <div class="popover-header">
+                  <strong>💡 Mengapa Menggunakan Rumus Margin?</strong>
+                  <button type="button" class="btn-close-popover" id="btn-close-margin-info" aria-label="Tutup Penjelasan">&times;</button>
+                </div>
+                <p><strong>Margin adalah persentase keuntungan dari harga jual, bukan dari modal.</strong></p>
+                <p class="popover-formula"><code>Harga Jual = HPP / (1 - Target Margin)</code></p>
+                <div class="popover-example">
+                  <strong>Contoh:</strong><br>
+                  HPP Rp6.000 dengan target margin 40% (0,4):<br>
+                  Harga Jual = Rp6.000 / (1 - 0,40) = Rp6.000 / 0,60 = <strong>Rp10.000</strong>.<br>
+                  <em>Keuntungan: Rp4.000 (tepat 40% dari harga jual Rp10.000).</em>
+                </div>
+              </div>
+
+              <div class="slider-control-group">
+                <input type="range" min="5" max="95" step="1" value="40" class="input-slider" id="slider-target-margin">
+                <div class="input-prefix-wrapper slider-val-box">
+                  <input type="number" min="0" max="99" class="input-text" id="input-target-margin" value="40">
+                  <span style="position: absolute; right: 12px; font-weight: 700; color: var(--text-muted);">%</span>
+                </div>
+              </div>
+              <span class="form-help">Standar bisnis kue umumnya 30% - 50% untuk menutupi risiko reject.</span>
+            </div>
+
+            <!-- Pembulatan Harga Jual -->
+            <div class="form-group span-half">
+              <label class="form-label" for="select-round-mode">Pembulatan Harga Jual</label>
+              <select id="select-round-mode" class="select-input">
+                <option value="none">Tanpa Pembulatan (Nominal Asli)</option>
+                <option value="100">Bulatkan ke atas Rp100</option>
+                <option value="500" selected>Bulatkan ke atas Rp500</option>
+                <option value="1000">Bulatkan ke atas Rp1.000</option>
+              </select>
+              <span class="form-help">Pembulatan ke atas menjamin harga tidak turun di bawah target margin Anda.</span>
+            </div>
+
+            <!-- Toggle Harga Jual Manual -->
+            <div class="form-group span-full">
+              <label class="toggle-switch-label">
+                <input type="checkbox" class="toggle-input" id="toggle-manual-price">
+                <span class="toggle-slider"></span>
+                <span class="form-label">Saya sudah punya harga jual sendiri (Cek margin aktual)</span>
+              </label>
+            </div>
+
+            <div class="form-group span-half" id="group-manual-price" style="display: none;">
+              <label class="form-label" for="input-manual-price">Harga Jual Yang Anda Tentukan (Rp / unit)</label>
+              <div class="input-prefix-wrapper">
+                <span class="input-prefix">Rp</span>
+                <input type="number" min="0" step="500" class="input-text" id="input-manual-price" placeholder="Contoh: 15000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Button Bar -->
+          <div class="calculator-actions">
+            <div class="actions-primary">
+              <button type="button" class="btn btn-primary" id="btn-calculate">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <span>Hitung HPP</span>
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-reset">
+                <span>Reset Contoh</span>
+              </button>
+            </div>
+
+            <div class="actions-secondary">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-save-calc" title="Simpan ke Riwayat Lokal">
+                <span>💾 Simpan</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-calc" title="Salin Ringkasan">
+                <span>📋 Salin</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-share-calc" title="Bagikan Ringkasan">
+                <span>🔗 Bagikan</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-print-calc" title="Cetak atau Simpan PDF">
+                <span>🖨️ Cetak / PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. HASIL KALKULASI SECTION (Dashboard Cards) -->
+        <div class="results-card" id="section-result">
+          <div class="results-header">
+            <div>
+              <span class="section-pill">Hasil Perhitungan</span>
+              <h3 class="card-title" id="res-product-name">Fudgy Brownies Shiny Crust</h3>
+            </div>
+            <div class="results-badge-wrap">
+              <span class="badge" style="background: var(--color-beige); color: var(--color-coffee); padding: 4px 10px; border-radius: 8px; font-weight: 700;">
+                Target Margin: <strong id="res-margin-pct">40%</strong>
+              </span>
+            </div>
+          </div>
+
+          <div id="res-margin-warning" class="row-error" style="display: none; margin-bottom: 1.5rem;"></div>
+
+          <!-- Main 3 Stat Cards -->
+          <div class="results-main-grid">
+            <!-- Total HPP Batch -->
+            <div class="stat-box">
+              <span class="stat-label">Total HPP Per Batch</span>
+              <span class="stat-value" id="res-hpp-total">Rp 0</span>
+              <span class="stat-sub">Modal bahan + operasional 1 resep</span>
+            </div>
+
+            <!-- HPP Per Unit -->
+            <div class="stat-box">
+              <span class="stat-label">HPP Modal <span id="res-unit-label">/ Slice</span></span>
+              <span class="stat-value text-caramel" id="res-hpp-per-unit">Rp 0</span>
+              <span class="stat-sub">Batas modal minimal agar tidak rugi</span>
+            </div>
+
+            <!-- Rekomendasi Harga Jual -->
+            <div class="stat-box highlight">
+              <span class="stat-label">Rekomendasi Harga Jual</span>
+              <span class="stat-value" id="res-recommended-price">Rp 0</span>
+              <span class="stat-sub">Harga jual ideal <span id="res-unit-label-2">/ Slice</span></span>
+            </div>
+          </div>
+
+          <!-- Sub Stats Breakdown -->
+          <div class="results-sub-grid">
+            <div class="sub-stat-item">
+              <span class="sub-stat-label">Estimasi Untung / Unit</span>
+              <span class="sub-stat-val text-success" id="res-profit-per-unit">Rp 0</span>
+            </div>
+            <div class="sub-stat-item">
+              <span class="sub-stat-label">Total Untung 1 Batch</span>
+              <span class="sub-stat-val text-success" id="res-total-profit">Rp 0</span>
+            </div>
+            <div class="sub-stat-item">
+              <span class="sub-stat-label">Total Biaya Bahan</span>
+              <span class="sub-stat-val" id="res-ingredients-total">Rp 0</span>
+            </div>
+            <div class="sub-stat-item">
+              <span class="sub-stat-label">Total Biaya Operasional</span>
+              <span class="sub-stat-val" id="res-additional-total">Rp 0</span>
+            </div>
+          </div>
+
+          <!-- Evaluasi Harga Manual Box jika aktif -->
+          <div class="manual-box" id="res-manual-box" style="display: none;">
+            <h4 style="font-size: 1rem; color: var(--color-coffee); font-weight: 800;">Evaluasi Harga Jual Manual Anda</h4>
+            <div class="manual-grid">
+              <div>
+                <span class="sub-stat-label">Harga Jual Aktual:</span>
+                <div class="sub-stat-val" id="res-manual-price">Rp 0</div>
+              </div>
+              <div>
+                <span class="sub-stat-label">Keuntungan Per Unit:</span>
+                <div class="sub-stat-val" id="res-manual-profit">Rp 0</div>
+              </div>
+              <div>
+                <span class="sub-stat-label">Margin Keuntungan Aktual:</span>
+                <div class="sub-stat-val" id="res-manual-margin">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. PERLENGKAPAN BAKING PILIHAN (AFFILIATE PRODUCT GALLERY) -->
+        <section class="affiliate-gallery-section" id="section-affiliate-gallery" style="margin-top: 3.5rem;">
+          <div class="gallery-header-row">
+            <div>
+              <span class="section-pill">Koleksi Terpilih</span>
+              <h3 class="gallery-title">Perlengkapan Baking Pilihan</h3>
+              <p class="gallery-subtitle">Temukan perlengkapan yang bisa membantu aktivitas baking Anda.</p>
+            </div>
+            <a href="products.html" class="btn btn-secondary btn-sm gallery-all-btn">
+              <span>Semua Produk &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Horizontal scroll-snap gallery di mobile, grid rapi di desktop -->
+          <div class="affiliate-gallery-scroll" id="affiliate-gallery-container" tabindex="0" role="region" aria-label="Katalog Perlengkapan Baking Pilihan">
+            <!-- Dynamic Thumbnails Loaded from AffiliateManager -->
+          </div>
+
+          <!-- Affiliate Disclosure -->
+          <div class="affiliate-disclosure-banner" style="margin-top: 1.5rem;">
+            <p>ℹ️ <strong>Transparansi Afiliasi:</strong> Sebagian tautan produk merupakan tautan afiliasi Shopee. Kami dapat menerima komisi dari pembelian melalui tautan tersebut tanpa biaya tambahan bagi Anda.</p>
+          </div>
+        </section>
+
+        <!-- 7. PROMOSI BAKING CALCULATOR PRO -->
+        <div class="pro-promo-card">
+          <div class="pro-promo-content">
+            <h3>Butuh fitur baking yang lebih lengkap?</h3>
+            <p>Kenali <strong>Baking Calculator Pro</strong> untuk kebutuhan pengelolaan resep massal, scaling adonan otomatis, stok bahan baku, dan laporan laba rugi usaha baking yang lebih lanjut.</p>
+          </div>
+          <div>
+            <a href="#" class="btn btn-primary" id="btn-pro-app">
+              <span>Pelajari Baking Pro</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. RIWAYAT PERHITUNGAN (LOCAL STORAGE) -->
+        <section class="history-section" id="section-history" style="margin-top: 3.5rem;">
+          <div class="card-header" style="border-bottom: none; margin-bottom: 1rem; padding-bottom: 0;">
+            <div>
+              <span class="section-pill">Penyimpanan Perangkat</span>
+              <h3 class="card-title">Riwayat Kalkulasi Tersimpan (Maks. 10)</h3>
+              <p class="card-desc">Tersimpan secara privat di memori browser Anda dan tidak dikirim ke server mana pun.</p>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-danger" id="btn-clear-history">
+              Hapus Semua
+            </button>
+          </div>
+
+          <div class="history-grid" id="history-list">
+            <!-- Dynamic History Cards -->
+          </div>
+        </section>
+
+        <!-- 9. EDUKASI & FAQ HPP BAKING (SEO CONTENT) -->
+        <section class="section" style="padding-top: 2rem;">
+          <div class="section-title-wrap">
+            <span class="section-pill">Panduan Praktis</span>
+            <h2 class="section-title">Mengapa Menghitung HPP Kue Itu Krusial?</h2>
+          </div>
+
+          <div class="form-grid">
+            <div class="card span-half">
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 0.5rem;">1. Beda Margin vs Markup</h4>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+                Banyak pemula salah menghitung untung dengan markup 40% dari modal, padahal margin keuntungan dihitung dari <strong>harga jual akhir</strong>. Rumus yang benar adalah <code>Harga Jual = HPP / (1 - Target Margin)</code>. Dengan rumus ini, saat Anda memberi diskon 20%, Anda tidak akan tekor.
+              </p>
+            </div>
+
+            <div class="card span-half">
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--color-coffee); margin-bottom: 0.5rem;">2. Waspadai Biaya Tersembunyi</h4>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+                Selain tepung dan mentega, jangan lupakan biaya sekat loyang, dus kue, gas elpiji saat memanaskan oven, listrik mixer, hingga air cuci alat. Masukkan seluruh komponen tersebut ke dalam biaya operasional batch.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Bottom Bar for Mobile -->
+  <div class="mobile-bottom-bar" id="mobile-bottom-bar">
+    <a href="index.html#section-calculator" class="mobile-bottom-item active">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      <span>Kalkulator</span>
+    </a>
+    <a href="products.html" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Peralatan</span>
+    </a>
+    <a href="about.html" class="mobile-bottom-item">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <span>Tentang</span>
+    </a>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Baking Calculator Lite</h4>
+          <p class="footer-desc">
+            Aplikasi kalkulator HPP praktis untuk UMKM bakery, pembuat kue rumahan, dan pecinta baking di seluruh Indonesia. Hitung modal akurat, maksimalkan margin keuntungan.
+          </p>
+          <div>
+            <a href="https://www.tiktok.com/@bang_doned" target="_blank" rel="noopener noreferrer" class="btn-tiktok">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+              <span>Ikuti di TikTok @bang_doned</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Navigasi Cepat</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#section-calculator">Kalkulator HPP</a></li>
+            <li><a href="products.html">Rekomendasi Alat Baking</a></li>
+            <li><a href="about.html">Tentang Kami & Panduan HPP</a></li>
+            <li><a href="about.html#privacy">Privasi Data Pengguna</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-links-title">Kategori Alat Shopee</h5>
+          <ul class="footer-links">
+            <li><a href="products.html?cat=Timbangan+digital">Timbangan Digital Dapur</a></li>
+            <li><a href="products.html?cat=Mixer">Mixer Roti & Adonan</a></li>
+            <li><a href="products.html?cat=Oven">Oven Listrik & Gas</a></li>
+            <li><a href="products.html?cat=Loyang">Loyang Kue & Sekat</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Baking Calculator Lite. Hak cipta dilindungi undang-undang.
+        </div>
+        <div>
+          Dibuat dengan ❤️ untuk UMKM Bakery Indonesia.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="affiliate-config.js"></script>
+  <script src="analytics-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/affiliate.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('ServiceWorker registered:', reg.scope))
+          .catch(err => console.warn('ServiceWorker registration failed:', err));
+      });
+    }
+
+    // Mobile nav toggle handler
+    const mobBtn = document.getElementById('mobile-toggle');
+    const mobMenu = document.getElementById('nav-menu');
+    if (mobBtn && mobMenu) {
+      mobBtn.addEventListener('click', () => {
+        mobMenu.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>
