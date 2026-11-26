@@ -307,7 +307,7 @@ button, input, select, textarea {
   font-weight: 800;
   line-height: 1.2;
   color: var(--color-coffee);
-  margin-bottom: 1rem;
+  margin-bottom: 1.75rem;
   letter-spacing: -0.5px;
 }
 
@@ -341,7 +341,7 @@ button, input, select, textarea {
 
 .hero-illustration {
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   filter: drop-shadow(0 15px 30px rgba(74, 46, 24, 0.1));
   animation: floatSubtle 6s ease-in-out infinite;
 }
