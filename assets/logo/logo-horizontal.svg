@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hCaramel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DDA15E"/>
+      <stop offset="100%" stop-color="#BC6C25"/>
+    </linearGradient>
+    <linearGradient id="hCoffee" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2E18"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Icon Mark -->
+  <g transform="translate(10, 10)">
+    <rect width="80" height="80" rx="22" fill="#FAF6F0" stroke="#DDA15E" stroke-width="2"/>
+    <rect x="18" y="18" width="44" height="20" rx="6" fill="#3A1F0D"/>
+    <text x="54" y="32" font-family="system-ui, sans-serif" font-size="9" font-weight="800" fill="#DDA15E" text-anchor="end">HPP</text>
+    <!-- Mini Cupcake / Whisk icon -->
+    <path d="M25,50 C22,42 30,38 40,38 C50,38 58,42 55,50 Z" fill="#FFFDF9"/>
+    <path d="M26,50 L31,70 C31.5,71 33,72 35,72 L45,72 C47,72 48.5,71 49,70 L54,50 Z" fill="url(#hCaramel)"/>
+    <circle cx="40" cy="38" r="4" fill="#E76F51"/>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(105, 45)">
+    <text x="0" y="0" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="28" font-weight="800" fill="url(#hCoffee)" letter-spacing="-0.5">Baking Calculator</text>
+    <rect x="250" y="-22" width="60" height="26" rx="8" fill="url(#hCaramel)"/>
+    <text x="280" y="-4" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">LITE</text>
+    <text x="0" y="26" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#8C6D58" letter-spacing="0.2">Hitung Modal • Tentukan Harga • Maksimalkan Profit</text>
+  </g>
+</svg>

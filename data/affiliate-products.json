@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-26",
+  "disclosure": "Sebagian tautan produk merupakan tautan afiliasi Shopee. Kami dapat menerima komisi dari pembelian melalui tautan tersebut tanpa biaya tambahan bagi Anda.",
+  "categories": [
+    "Semua",
+    "Mixer",
+    "Oven",
+    "Loyang",
+    "Timbangan digital",
+    "Alat ukur",
+    "Spatula dan whisk",
+    "Baking tools",
+    "Bahan kue",
+    "Dekorasi kue",
+    "Packaging",
+    "Peralatan usaha baking"
+  ],
+  "products": [
+    {
+      "id": "bcl-001",
+      "name": "Timbangan Digital Dapur Presisi 0.1g",
+      "description": "Timbangan akurat dengan akurasi tinggi untuk menimbang ragi, garam, dan bahan kue kecil dengan presisi maksimal.",
+      "category": "Timbangan digital",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 65000,
+      "shopee_url": "",
+      "label": "Wajib Punya",
+      "featured": true,
+      "active": false
+    },
+    {
+      "id": "bcl-002",
+      "name": "Spatula Silikon Tahan Panas Food Grade",
+      "description": "Spatula fleksibel lentur tanpa sambungan, aman untuk adonan panas dan membersihkan mangkuk tanpa sisa.",
+      "category": "Spatula dan whisk",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 28000,
+      "shopee_url": "",
+      "label": "Cocok untuk Pemula",
+      "featured": true,
+      "active": false
+    },
+    {
+      "id": "bcl-003",
+      "name": "Whisk Pengocok Telur Stainless Steel",
+      "description": "Bahan stainless steel tebal anti karat dengan kawat kokoh untuk mengocok telur dan adonan cair merata.",
+      "category": "Spatula dan whisk",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 32000,
+      "shopee_url": "",
+      "label": "Pilihan Baking",
+      "featured": false,
+      "active": false
+    },
+    {
+      "id": "bcl-004",
+      "name": "Stand Mixer Planetary 5 Liter",
+      "description": "Mixer bertenaga tinggi untuk menguleni adonan roti dan mengocok whipping cream dalam kapasitas usaha bakery rumahan.",
+      "category": "Mixer",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 1450000,
+      "shopee_url": "",
+      "label": "Peralatan Usaha",
+      "featured": true,
+      "active": false
+    },
+    {
+      "id": "bcl-005",
+      "name": "Oven Listrik Convection 38 Liter",
+      "description": "Suhu stabil merata dengan api atas-bawah independen, cocok untuk memanggang kue bolu, brownies, dan cookies renyah.",
+      "category": "Oven",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 1250000,
+      "shopee_url": "",
+      "label": "Rekomendasi",
+      "featured": false,
+      "active": false
+    },
+    {
+      "id": "bcl-006",
+      "name": "Loyang Sekat Brownies Panggang 20x20",
+      "description": "Loyang anti lengket dengan sekat praktis yang memotong brownies rapi sama rata tanpa repot memotong manual.",
+      "category": "Loyang",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 75000,
+      "shopee_url": "",
+      "label": "Favorit Baking",
+      "featured": true,
+      "active": false
+    },
+    {
+      "id": "bcl-007",
+      "name": "Sendok Takar Set 6-in-1 Stainless",
+      "description": "Sendok ukur presisi untuk takaran sendok teh (tsp) dan sendok makan (tbsp) dengan ukiran permanen anti luntur.",
+      "category": "Alat ukur",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 35000,
+      "shopee_url": "",
+      "label": "Cocok untuk Pemula",
+      "featured": false,
+      "active": false
+    },
+    {
+      "id": "bcl-008",
+      "name": "Baking Mat Silikon Skala Pengukur Adonan",
+      "description": "Alas adonan anti selip dengan garis lingkar diameter untuk mencetak pizza, roti, dan pastry dengan ukuran pas.",
+      "category": "Baking tools",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 42000,
+      "shopee_url": "",
+      "label": "Pilihan Baking",
+      "featured": false,
+      "active": false
+    },
+    {
+      "id": "bcl-009",
+      "name": "Gelas Ukur Borosilikat 1000ml Tahan Panas",
+      "description": "Gelas ukur kaca tebal tahan suhu panas dan dingin dengan skala volume mililiter yang mudah dibaca.",
+      "category": "Alat ukur",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 55000,
+      "shopee_url": "",
+      "label": "Wajib Punya",
+      "featured": false,
+      "active": false
+    },
+    {
+      "id": "bcl-010",
+      "name": "Kotak Dus Kue Kraft Window 20x20x10",
+      "description": "Kemasan food-grade elegan dengan jendela mika transparan untuk mempercantik display jualan kue Anda.",
+      "category": "Packaging",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 4500,
+      "shopee_url": "",
+      "label": "Peralatan Usaha",
+      "featured": false,
+      "active": false
+    }
+  ]
+}

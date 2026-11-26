@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF9"/>
+      <stop offset="50%" stop-color="#FAF4EB"/>
+      <stop offset="100%" stop-color="#F2E6D8"/>
+    </linearGradient>
+    <linearGradient id="warmCaramel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0A96D"/>
+      <stop offset="100%" stop-color="#BC6C25"/>
+    </linearGradient>
+    <linearGradient id="deepCoffee" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5C3D2E"/>
+      <stop offset="100%" stop-color="#2D1B12"/>
+    </linearGradient>
+    <linearGradient id="creamGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F7EFE5"/>
+    </linearGradient>
+    <filter id="heroShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#4A2E18" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient glow backdrop -->
+  <circle cx="300" cy="225" r="190" fill="#F8EADB" opacity="0.6"/>
+  <circle cx="460" cy="120" r="70" fill="#EAD7C5" opacity="0.4"/>
+
+  <!-- Table / Wooden surface base -->
+  <ellipse cx="300" cy="380" rx="270" ry="40" fill="#E8D5C4" opacity="0.7"/>
+  <ellipse cx="300" cy="375" rx="250" ry="32" fill="#FAF6F0"/>
+
+  <!-- DIGITAL SCALE (Center piece of precision baking) -->
+  <g transform="translate(180, 200)" filter="url(#heroShadow)">
+    <!-- Scale base -->
+    <rect x="0" y="70" width="220" height="50" rx="16" fill="url(#creamGloss)" stroke="#DDA15E" stroke-width="2"/>
+    <rect x="15" y="80" width="190" height="30" rx="10" fill="#EFE5D8"/>
+    <!-- Digital LCD -->
+    <rect x="110" y="86" width="80" height="18" rx="4" fill="#2B1608"/>
+    <text x="180" y="100" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#F4A261" text-anchor="end">450.0 g</text>
+    <circle cx="45" cy="95" r="6" fill="#BC6C25"/>
+    <circle cx="70" cy="95" r="6" fill="#DDA15E"/>
+    
+    <!-- Scale platform -->
+    <rect x="10" y="55" width="200" height="15" rx="6" fill="#E4D3C0"/>
+    
+    <!-- Mixing Bowl on Scale -->
+    <path d="M25,55 C25,5 195,5 195,55 Z" fill="url(#creamGloss)" stroke="#DDA15E" stroke-width="2"/>
+    <!-- Flour / Batter inside bowl -->
+    <path d="M38,45 C50,25 170,25 182,45 Z" fill="#FFFDF9"/>
+    <!-- Whisk inside bowl -->
+    <g transform="translate(110, -20) rotate(22)">
+      <rect x="-4" y="-70" width="8" height="60" rx="4" fill="url(#deepCoffee)"/>
+      <path d="M-14,-10 C-22,25 22,25 14,-10 C10,-2 6,8 0,15 C-6,8 -10,-2 -14,-10 Z" fill="none" stroke="#A88B74" stroke-width="3"/>
+      <ellipse cx="0" cy="8" rx="12" ry="24" fill="none" stroke="#A88B74" stroke-width="2"/>
+      <ellipse cx="0" cy="8" rx="6" ry="24" fill="none" stroke="#A88B74" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- CALCULATOR & NOTEBOOK (Left side) -->
+  <g transform="translate(50, 180) rotate(-6)" filter="url(#heroShadow)">
+    <!-- Recipe note card -->
+    <rect x="0" y="0" width="130" height="170" rx="16" fill="#FFFFFF" stroke="#E6DAC8" stroke-width="2"/>
+    <!-- Lines on card -->
+    <rect x="20" y="24" width="60" height="8" rx="4" fill="url(#warmCaramel)"/>
+    <rect x="20" y="44" width="90" height="4" rx="2" fill="#EAD7C5"/>
+    <rect x="20" y="56" width="75" height="4" rx="2" fill="#EAD7C5"/>
+    <rect x="20" y="68" width="85" height="4" rx="2" fill="#EAD7C5"/>
+    <rect x="20" y="80" width="55" height="4" rx="2" fill="#EAD7C5"/>
+    <!-- Badge: HPP Target -->
+    <rect x="16" y="100" width="98" height="48" rx="10" fill="#FAF4EB" stroke="#DDA15E" stroke-width="1.5"/>
+    <text x="24" y="118" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#8C6D58">TARGET MARGIN</text>
+    <text x="24" y="138" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#BC6C25">45% PROFIT</text>
+  </g>
+
+  <!-- BAKING ACCESSORIES (Right side) -->
+  <!-- Measuring Spoons -->
+  <g transform="translate(425, 260) rotate(15)" filter="url(#heroShadow)">
+    <circle cx="20" cy="20" r="18" fill="url(#warmCaramel)"/>
+    <circle cx="20" cy="20" r="14" fill="#A75B1B"/>
+    <rect x="16" y="38" width="8" height="55" rx="4" fill="url(#deepCoffee)"/>
+  </g>
+
+  <!-- Silicone Spatula -->
+  <g transform="translate(465, 170) rotate(35)" filter="url(#heroShadow)">
+    <path d="M10,0 C25,0 35,15 32,45 C30,65 15,75 5,75 C0,75 -5,55 0,35 C4,20 0,0 10,0 Z" fill="#E76F51"/>
+    <rect x="12" y="70" width="8" height="90" rx="4" fill="#FAF6F0" stroke="#DDA15E" stroke-width="1.5"/>
+  </g>
+
+  <!-- Fresh Cupcake on a stand -->
+  <g transform="translate(430, 290)">
+    <ellipse cx="40" cy="55" rx="45" ry="12" fill="#D9C2AD" opacity="0.5"/>
+    <!-- Cup -->
+    <path d="M15,20 L25,50 L55,50 L65,20 Z" fill="url(#warmCaramel)"/>
+    <!-- Swirl icing -->
+    <path d="M10,20 C5,5 30,-8 40,-8 C50,-8 75,5 70,20 Z" fill="#FFFDF9" stroke="#EAD7C5" stroke-width="1.5"/>
+    <circle cx="40" cy="-10" r="6" fill="#E76F51"/>
+  </g>
+
+  <!-- Floating Sparkles & Math Icons -->
+  <g fill="#DDA15E" opacity="0.8">
+    <!-- Star 1 -->
+    <path d="M160,110 L163,122 L175,125 L163,128 L160,140 L157,128 L145,125 L157,122 Z"/>
+    <!-- Star 2 -->
+    <path d="M420,90 L422,98 L430,100 L422,102 L420,110 L418,102 L410,100 L418,98 Z"/>
+    <!-- Rp pill badge -->
+    <g transform="translate(240, 70)">
+      <rect width="90" height="32" rx="16" fill="url(#warmCaramel)" filter="url(#heroShadow)"/>
+      <text x="45" y="21" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">Rp Presisi</text>
+    </g>
+  </g>
+</svg>
