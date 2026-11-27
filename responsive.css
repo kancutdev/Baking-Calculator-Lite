@@ -19,25 +19,6 @@
 
 /* Tablet (768px - 1023px) */
 @media (max-width: 1023px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2rem;
-  }
-
-  .hero-desc {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-illustration {
-    max-width: 320px;
-  }
-
   .results-main-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -305,7 +286,21 @@
   }
 
   .affiliate-gallery-section {
-    padding: 1.5rem 0 1.75rem !important;
+    padding: 1rem 0 1.25rem !important;
+  }
+
+  .gallery-header-row {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .gallery-title {
+    font-size: 1.15rem !important;
+  }
+
+  .gallery-all-link {
+    font-size: 0.82rem !important;
   }
 
   .affiliate-gallery-scroll {
@@ -318,7 +313,7 @@
     -webkit-overflow-scrolling: touch !important;
     scroll-behavior: smooth !important;
     gap: 12px !important;
-    padding: 4px 4px 12px 4px !important;
+    padding: 2px 2px 10px 2px !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
   }
@@ -328,49 +323,41 @@
   }
 
   .affiliate-thumb-card {
-    flex: 0 0 140px !important;
-    min-width: 140px !important;
-    max-width: 145px !important;
+    flex: 0 0 148px !important;
+    min-width: 148px !important;
+    max-width: 154px !important;
     scroll-snap-align: start !important;
   }
 
   .thumb-info {
-    padding: 8px 10px 10px !important;
+    padding: 6px 8px 8px !important;
+    gap: 2px !important;
   }
 
   .thumb-title {
-    font-size: 0.78rem !important;
-    min-height: 2.2em !important;
+    font-size: 0.74rem !important;
+    line-height: 1.2 !important;
+    min-height: 2.1em !important;
   }
 
   .thumb-price {
-    font-size: 0.88rem !important;
+    font-size: 0.78rem !important;
   }
 
-  .gallery-header-row {
-    flex-direction: row;
-    align-items: flex-end;
-    margin-bottom: 1rem !important;
-  }
-
-  .gallery-title {
-    font-size: 1.25rem;
-  }
-
-  .gallery-subtitle {
-    font-size: 0.85rem;
+  .thumb-shopee-tag {
+    font-size: 0.64rem !important;
   }
 
   .gallery-calc-cta-wrap {
-    margin-top: 1.25rem !important;
+    margin-top: 1rem !important;
     width: 100% !important;
   }
 
-  .gallery-calc-cta-wrap .btn {
+  .gallery-calc-cta-wrap .btn-calc-jump {
     width: 100% !important;
     justify-content: center !important;
-    padding: 12px 20px !important;
-    font-size: 0.98rem !important;
+    padding: 11px 20px !important;
+    font-size: 0.95rem !important;
   }
 
   .gallery-empty-fallback {
@@ -378,8 +365,6 @@
     text-align: center;
     gap: 0.75rem;
     padding: 1rem !important;
-  }
-    padding: 1.25rem 1rem;
   }
 
   .search-box-wrapper {
@@ -527,11 +512,6 @@
     font-size: 0.8rem;
   }
 
-  .hero-illustration {
-    max-width: 150px;
-    margin: 0.5rem auto 0;
-  }
-
   .preset-buttons {
     flex-direction: column;
     align-items: stretch;
@@ -556,17 +536,16 @@
     font-size: 0.975rem;
   }
 
+  .hero-section {
+    padding: 1.15rem 0 0.5rem !important;
+  }
+
   .hero-title {
-    font-size: 1.55rem;
+    font-size: 1.5rem !important;
     line-height: 1.22;
     word-break: break-word;
     overflow-wrap: break-word;
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-illustration {
-    max-width: 130px;
-    margin: 0.25rem auto 0;
+    margin-bottom: 0.4rem;
   }
 
   .affiliate-thumb-card {
@@ -575,12 +554,27 @@
     max-width: 142px !important;
   }
 
-  .hero-desc {
-    font-size: 1rem;
+  .affiliate-gallery-scroll {
+    gap: 10px !important;
+    padding: 2px 2px 8px 2px !important;
   }
 
-  .hero-actions .btn {
-    width: 100%;
+  .thumb-info {
+    padding: 5px 6px 6px !important;
+  }
+
+  .thumb-title {
+    font-size: 0.72rem !important;
+    line-height: 1.18 !important;
+    min-height: 2.1em !important;
+  }
+
+  .thumb-price {
+    font-size: 0.76rem !important;
+  }
+
+  .thumb-shopee-tag {
+    font-size: 0.62rem !important;
   }
 
   .stat-value {
@@ -691,21 +685,37 @@
   }
 
   .hero-title {
-    font-size: 1.35rem;
+    font-size: 1.35rem !important;
     line-height: 1.22;
     word-break: break-word;
     overflow-wrap: break-word;
     margin-bottom: 0.35rem;
   }
 
-  .hero-illustration {
-    max-width: 110px;
-    margin: 0.25rem auto 0;
-  }
-
   .affiliate-thumb-card {
     flex: 0 0 130px !important;
     min-width: 130px !important;
-    max-width: 135px !important;
+    max-width: 134px !important;
+  }
+
+  .affiliate-gallery-scroll {
+    gap: 8px !important;
+  }
+
+  .thumb-info {
+    padding: 4px 5px 5px !important;
+  }
+
+  .thumb-title {
+    font-size: 0.69rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .thumb-price {
+    font-size: 0.72rem !important;
+  }
+
+  .thumb-shopee-tag {
+    font-size: 0.60rem !important;
   }
 }

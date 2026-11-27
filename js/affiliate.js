@@ -461,7 +461,7 @@ const AffiliateManager = (() => {
 
     link.appendChild(imgWrapper);
 
-    // 2. Info Content
+    // 2. Info Content (Compact Square Layout)
     const info = document.createElement('div');
     info.className = 'thumb-info';
 
@@ -470,25 +470,30 @@ const AffiliateManager = (() => {
     title.textContent = product.name;
     info.appendChild(title);
 
+    // Meta row (Price + Shopee Tag bersisian agar hemat tinggi kartu)
+    const metaRow = document.createElement('div');
+    metaRow.className = 'thumb-meta-row';
+
     // Harga hanya jika valid dalam data
     if (product.price !== null && typeof product.price === 'number' && product.price > 0 && typeof Utils !== 'undefined') {
-      const priceTag = document.createElement('div');
+      const priceTag = document.createElement('span');
       priceTag.className = 'thumb-price';
       priceTag.textContent = Utils.formatRupiah(product.price);
-      info.appendChild(priceTag);
+      metaRow.appendChild(priceTag);
     }
 
     // Indikator Shopee yang halus dan elegan (bukan tombol promosi raksasa)
-    const shopeeTag = document.createElement('div');
+    const shopeeTag = document.createElement('span');
     shopeeTag.className = 'thumb-shopee-tag';
     shopeeTag.innerHTML = `
-      <svg class="shopee-icon-mini" viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+      <svg class="shopee-icon-mini" viewBox="0 0 24 24" width="11" height="11" fill="currentColor">
         <path d="M19 6h-2c0-2.8-2.2-5-5-5S7 3.2 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.7 0 3 1.3 3 3H9c0-1.7 1.3-3 3-3zm7 17H5V8h2v2c0 .6.4 1 1 1s1-.4 1-1V8h6v2c0 .6.4 1 1 1s1-.4 1-1V8h2v12z"/>
       </svg>
-      <span>Shopee &rarr;</span>
+      <span>Shopee</span>
     `;
-    info.appendChild(shopeeTag);
+    metaRow.appendChild(shopeeTag);
 
+    info.appendChild(metaRow);
     link.appendChild(info);
     card.appendChild(link);
 

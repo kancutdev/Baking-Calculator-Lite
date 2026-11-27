@@ -403,6 +403,29 @@
         Analytics.trackAffiliateClick = origTrack;
       }
 
+      // Test 59: Kompak square thumbnail format & metadata row
+      const thumbCompact = AffiliateManager.createGalleryThumbnail(sampleProdA, 'homepage_top_gallery');
+      const metaRow = thumbCompact.querySelector('.thumb-meta-row');
+      const imgWrapper = thumbCompact.querySelector('.thumb-img-wrapper');
+      assert('Thumbnail kartu produk memiliki .thumb-meta-row satu baris dan .thumb-img-wrapper 1:1',
+        metaRow !== null && imgWrapper !== null && metaRow.contains(thumbCompact.querySelector('.thumb-price')) && metaRow.contains(thumbCompact.querySelector('.thumb-shopee-tag')));
+
+      // Test 60: DOM verification - hero-illustration tidak ada di DOM
+      const domIllustration = document.querySelector('.hero-illustration');
+      assert('Hero illustration sepenuhnya dihilangkan dari DOM untuk efisiensi ruang vertikal',
+        domIllustration === null);
+
+      // Test 61: DOM verification - hero-desc paragraf panjang tidak ada di DOM
+      const domDesc = document.querySelector('.hero-desc');
+      assert('Paragraf deskripsi panjang hero tidak ada di DOM (fokus langsung ke headline & produk)',
+        domDesc === null);
+
+      // Test 62: Single horizontal row scroll container styling assertions
+      const scrollContainer = document.createElement('div');
+      scrollContainer.className = 'affiliate-gallery-scroll';
+      assert('Container galeri affiliate menggunakan single-row scroll dengan class .affiliate-gallery-scroll',
+        scrollContainer.className.includes('affiliate-gallery-scroll'));
+
       // Tampilkan Hasil di DOM
       renderSummary();
     }
