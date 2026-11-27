@@ -27,7 +27,7 @@
       "shopee_url": "",
       "label": "Wajib Punya",
       "featured": true,
-      "active": false
+      "active": true
     },
     {
       "id": "bcl-002",
@@ -39,7 +39,7 @@
       "shopee_url": "",
       "label": "Cocok untuk Pemula",
       "featured": true,
-      "active": false
+      "active": true
     },
     {
       "id": "bcl-003",
@@ -51,7 +51,7 @@
       "shopee_url": "",
       "label": "Pilihan Baking",
       "featured": false,
-      "active": false
+      "active": true
     },
     {
       "id": "bcl-004",
