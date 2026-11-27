@@ -723,8 +723,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isLargeBatch: (Number(el.yieldQty ? el.yieldQty.value : 1) >= 24)
       };
 
-      // Ambil hingga 5 produk kontekstual untuk gallery (desktop: 4-5 card, mobile: 2-3 terlihat dengan horizontal scroll)
-      const recommendations = AffiliateManager.getContextualRecommendations(5, context);
+      // Ambil hingga 10 produk untuk gallery dalam satu baris horizontal scroll
+      const recommendations = AffiliateManager.getContextualRecommendations(10, context);
 
       container.innerHTML = '';
 
@@ -746,7 +746,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       recommendations.forEach(product => {
-        const thumb = AffiliateManager.createGalleryThumbnail(product, 'homepage_product_gallery');
+        const thumb = AffiliateManager.createGalleryThumbnail(product, 'homepage_top_gallery');
         container.appendChild(thumb);
       });
     } catch (err) {
@@ -996,6 +996,59 @@ document.addEventListener('DOMContentLoaded', () => {
         popoverMargin.style.display = 'none';
       }
     });
+
+    // 17. Navigasi Scroll Horizontal & Drag untuk Galeri Produk
+    const galleryScroll = document.getElementById('affiliate-gallery-container');
+    const btnGalleryPrev = document.getElementById('gallery-nav-prev');
+    const btnGalleryNext = document.getElementById('gallery-nav-next');
+
+    if (btnGalleryPrev && galleryScroll) {
+      btnGalleryPrev.addEventListener('click', () => {
+        galleryScroll.scrollBy({ left: -260, behavior: 'smooth' });
+      });
+    }
+
+    if (btnGalleryNext && galleryScroll) {
+      btnGalleryNext.addEventListener('click', () => {
+        galleryScroll.scrollBy({ left: 260, behavior: 'smooth' });
+      });
+    }
+
+    // Mouse drag scroll support on desktop
+    if (galleryScroll) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let hasDragged = false;
+
+      galleryScroll.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - galleryScroll.offsetLeft;
+        scrollLeft = galleryScroll.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDown = false;
+        setTimeout(() => { hasDragged = false; }, 50);
+      });
+
+      galleryScroll.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - galleryScroll.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(walk) > 5) hasDragged = true;
+        galleryScroll.scrollLeft = scrollLeft - walk;
+      });
+
+      // Prevent accidental click during drag
+      galleryScroll.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+    }
   };
 
   // Jalankan inisialisasi

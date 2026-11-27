@@ -19,15 +19,15 @@
   "products": [
     {
       "id": "bcl-001",
-      "name": "Hand Mixer",
-      "description": "",
-      "category": "Mixer",
-      "image": "https://down-id.img.susercontent.com/file/id-11134207-8224r-mkhhykfz7y84a6",
-      "price": 75000,
-      "shopee_url": "https://s.shopee.co.id/5fqcUMHe4G",
+      "name": "Timbangan Digital Dapur Presisi 0.1g",
+      "description": "Timbangan akurat dengan akurasi tinggi untuk menimbang ragi, garam, dan bahan kue kecil dengan presisi maksimal.",
+      "category": "Timbangan digital",
+      "image": "assets/images/placeholder-product.svg",
+      "price": 65000,
+      "shopee_url": "",
       "label": "Wajib Punya",
       "featured": true,
-      "active": true
+      "active": false
     },
     {
       "id": "bcl-002",

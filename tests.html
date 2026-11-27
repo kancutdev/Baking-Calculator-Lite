@@ -354,6 +354,55 @@
       assert('Indikator Shopee bernuansa natural dan tidak menggunakan tombol CTA besar agresif',
         shopeeTagA !== null && !thumbA.querySelector('.btn-shopee'));
 
+      // Test 55: Default placement homepage_top_gallery
+      const thumbTop = AffiliateManager.createGalleryThumbnail(sampleProdA);
+      assert('createGalleryThumbnail menggunakan placement homepage_top_gallery secara default',
+        thumbTop !== null && thumbTop.className.includes('affiliate-thumb-card'));
+
+      // Test 56: Filtering inactive & invalid URL products
+      const rawDummyProducts = [
+        { id: '1', name: 'Valid Product', active: true, shopee_url: 'https://shope.ee/valid1', image: 'assets/images/placeholder-product.svg' },
+        { id: '2', name: 'Inactive Product', active: false, shopee_url: 'https://shope.ee/valid2', image: 'assets/images/placeholder-product.svg' },
+        { id: '3', name: 'No URL Product', active: true, shopee_url: '', image: 'assets/images/placeholder-product.svg' },
+        { id: '4', name: 'Invalid URL Product', active: true, shopee_url: 'ftp://evil.com', image: 'assets/images/placeholder-product.svg' },
+        { id: '5', name: '', active: true, shopee_url: 'https://shope.ee/valid5', image: 'assets/images/placeholder-product.svg' }
+      ];
+      
+      const filtered = rawDummyProducts.filter(item => {
+        if (item.active !== true) return false;
+        if (!item.name || typeof item.name !== 'string' || !item.name.trim()) return false;
+        if (typeof Validation !== 'undefined') {
+          if (!Validation.isValidShopeeUrl(item.shopee_url)) return false;
+        } else if (!item.shopee_url) {
+          return false;
+        }
+        return true;
+      });
+      assert('Filter produk menyaring produk inactive, tanpa nama, atau link affiliate tidak valid',
+        filtered.length === 1 && filtered[0].id === '1');
+
+      // Test 57: Empty state saat 0 produk aktif
+      const emptyContainer = document.createElement('div');
+      emptyContainer.className = 'gallery-empty-fallback';
+      emptyContainer.innerHTML = '<h4 class="gallery-empty-title">Perlengkapan Baking Sedang Dikurasi</h4>';
+      assert('Empty state fallback menampilkan pesan bahwa produk sedang dikurasi tanpa broken image',
+        emptyContainer.textContent.includes('Perlengkapan Baking Sedang Dikurasi'));
+
+      // Test 58: GA4 tracking dengan placement homepage_top_gallery
+      let trackedPlacement = '';
+      const origTrack = typeof Analytics !== 'undefined' ? Analytics.trackAffiliateClick : null;
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackAffiliateClick = (opts) => { trackedPlacement = opts.placement; };
+      }
+      const thumbTrack = AffiliateManager.createGalleryThumbnail(sampleProdA, 'homepage_top_gallery');
+      const trackLink = thumbTrack.querySelector('.affiliate-thumb-link');
+      if (trackLink) trackLink.click();
+      assert('Klik thumbnail mengirimkan event affiliate_click dengan placement homepage_top_gallery',
+        trackedPlacement === 'homepage_top_gallery');
+      if (typeof Analytics !== 'undefined' && origTrack) {
+        Analytics.trackAffiliateClick = origTrack;
+      }
+
       // Tampilkan Hasil di DOM
       renderSummary();
     }

@@ -57,7 +57,7 @@
   <header class="site-header">
     <div class="container nav-container">
       <a href="index.html" class="brand-link" aria-label="Baking Calculator Lite Beranda">
-        <img src="assets/logo/logo.svg" alt="Logo Baking Calculator Lite" class="brand-logo-img" width="44" height="44">
+        <img src="assets/logo/logo.svg" alt="Baking Calculator Lite" class="brand-logo-img" width="44" height="44" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'46\' fill=\'%23FAF6F0\' stroke=\'%23DDA15E\' stroke-width=\'4\'/><text x=\'50\' y=\'62\' font-size=\'42\' text-anchor=\'middle\'>🍰</text></svg>';">
         <div class="brand-text-group">
           <div class="brand-name">
             Baking Calculator <span class="brand-badge">LITE</span>
@@ -86,7 +86,7 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- 1. HERO SECTION -->
     <section class="hero-section">
       <div class="container hero-grid">
         <div class="hero-content">
@@ -98,20 +98,50 @@
             Tentukan Harga. <br>
             <span class="highlight">Maksimalkan Profit.</span>
           </h1>
-          <div class="hero-actions">
-            <a href="#section-calculator" class="btn btn-primary">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-              <span>Mulai Hitung HPP</span>
-            </a>
-            <a href="products.html" class="btn btn-secondary">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <span>Rekomendasi Alat Baking</span>
+        </div>
+
+        <div class="hero-illustration-wrapper">
+          <img src="assets/images/hero-baking-tools.svg" alt="Ilustrasi Timbangan Digital dan Perlengkapan Baking" class="hero-illustration" width="480" height="360" onerror="this.style.display='none';">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. AFFILIATE PRODUCT GALLERY — POSISI DI ATAS (SATU BARIS HORIZONTAL) -->
+    <section class="affiliate-gallery-section" id="section-affiliate-gallery" aria-label="Rekomendasi Perlengkapan Baking Pilihan">
+      <div class="container">
+        <div class="gallery-header-row">
+          <div class="gallery-title-group">
+            <span class="section-pill">Koleksi Terpilih</span>
+            <h2 class="gallery-title">Perlengkapan Baking Pilihan</h2>
+            <p class="gallery-subtitle">Temukan perlengkapan yang bisa membantu aktivitas baking Anda.</p>
+          </div>
+          <div class="gallery-header-actions">
+            <div class="gallery-scroll-nav" aria-hidden="true">
+              <button type="button" class="btn-gallery-nav prev" id="gallery-nav-prev" aria-label="Geser ke kiri">&#8249;</button>
+              <button type="button" class="btn-gallery-nav next" id="gallery-nav-next" aria-label="Geser ke kanan">&#8250;</button>
+            </div>
+            <a href="products.html" class="btn btn-secondary btn-sm gallery-all-btn">
+              <span>Semua Produk &rarr;</span>
             </a>
           </div>
         </div>
 
-        <div class="hero-illustration-wrapper">
-          <img src="assets/images/hero-baking-tools.svg" alt="Ilustrasi Timbangan Digital dan Perlengkapan Baking" class="hero-illustration" width="480" height="360">
+        <!-- Single Horizontal Row (flex-nowrap, overflow-x: auto, scroll-snap) -->
+        <div class="affiliate-gallery-scroll" id="affiliate-gallery-container" tabindex="0" role="region" aria-label="Katalog Perlengkapan Baking Pilihan">
+          <!-- Dynamic Thumbnails Loaded from AffiliateManager -->
+        </div>
+
+        <!-- Affiliate Disclosure -->
+        <div class="affiliate-disclosure-banner">
+          <p>ℹ️ <strong>Transparansi Afiliasi:</strong> Sebagian tautan produk merupakan tautan afiliasi Shopee. Pembelian melalui tautan ini membantu pengembangan aplikasi tanpa biaya tambahan bagi Anda.</p>
+        </div>
+
+        <!-- 3. CTA UTAMA KALKULATOR HPP (SETELAH KATALOG AFFILIATE) -->
+        <div class="gallery-calc-cta-wrap">
+          <a href="#section-calculator" class="btn btn-primary btn-lg" id="btn-hero-calc">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            <span>Mulai Hitung HPP</span>
+          </a>
         </div>
       </div>
     </section>
@@ -426,29 +456,6 @@
           </div>
         </div>
 
-        <!-- 6. PERLENGKAPAN BAKING PILIHAN (AFFILIATE PRODUCT GALLERY) -->
-        <section class="affiliate-gallery-section" id="section-affiliate-gallery" style="margin-top: 3.5rem;">
-          <div class="gallery-header-row">
-            <div>
-              <span class="section-pill">Koleksi Terpilih</span>
-              <h3 class="gallery-title">Perlengkapan Baking Pilihan</h3>
-              <p class="gallery-subtitle">Temukan perlengkapan yang bisa membantu aktivitas baking Anda.</p>
-            </div>
-            <a href="products.html" class="btn btn-secondary btn-sm gallery-all-btn">
-              <span>Semua Produk &rarr;</span>
-            </a>
-          </div>
-
-          <!-- Horizontal scroll-snap gallery di mobile, grid rapi di desktop -->
-          <div class="affiliate-gallery-scroll" id="affiliate-gallery-container" tabindex="0" role="region" aria-label="Katalog Perlengkapan Baking Pilihan">
-            <!-- Dynamic Thumbnails Loaded from AffiliateManager -->
-          </div>
-
-          <!-- Affiliate Disclosure -->
-          <div class="affiliate-disclosure-banner" style="margin-top: 1.5rem;">
-            <p>ℹ️ <strong>Transparansi Afiliasi:</strong> Sebagian tautan produk merupakan tautan afiliasi Shopee. Kami dapat menerima komisi dari pembelian melalui tautan tersebut tanpa biaya tambahan bagi Anda.</p>
-          </div>
-        </section>
 
         <!-- 7. PROMOSI BAKING CALCULATOR PRO -->
         <div class="pro-promo-card">

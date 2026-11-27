@@ -407,7 +407,7 @@ const AffiliateManager = (() => {
    * @param {string} placement
    * @returns {HTMLElement}
    */
-  const createGalleryThumbnail = (product, placement = 'homepage_product_gallery') => {
+  const createGalleryThumbnail = (product, placement = 'homepage_top_gallery') => {
     const card = document.createElement('article');
     card.className = 'affiliate-thumb-card';
     card.setAttribute('data-id', product.id);
