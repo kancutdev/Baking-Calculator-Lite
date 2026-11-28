@@ -11,22 +11,65 @@ const AffiliateManager = (() => {
   let cachedProducts = [];
   let availableCategories = ['Semua'];
   let lastUpdatedTime = null;
+  let lastFingerprint = '';
   let isFetching = false;
+  let pollIntervalId = null;
+  let isPollingActive = false;
+  const subscribers = new Set();
 
   /**
-   * Mengambil URL endpoint yang aktif (remote jika ada, fallback ke local)
+   * Menghitung fingerprint unik data produk untuk deteksi perubahan realtime
+   */
+  const computeFingerprint = (products) => {
+    if (!Array.isArray(products)) return '';
+    return products.map(p => `${p.id}:${p.name}:${p.active}:${p.price}:${p.shopee_url}:${p.label}:${p.featured}:${p.image}`).join('|');
+  };
+
+  /**
+   * Mengambil URL endpoint yang aktif dengan cache-busting timestamp otomatis
    */
   const getActiveJsonUrl = (forceRefresh = false) => {
     let url = (typeof AFFILIATE_CONFIG !== 'undefined' && AFFILIATE_CONFIG.remoteJsonUrl) 
       ? AFFILIATE_CONFIG.remoteJsonUrl 
       : (typeof AFFILIATE_CONFIG !== 'undefined' ? AFFILIATE_CONFIG.localJsonUrl : 'data/affiliate-products.json');
 
-    // Hindari cache-busting berlebih, gunakan hanya saat forceRefresh
-    if (forceRefresh) {
-      const sep = url.includes('?') ? '&' : '?';
-      url += `${sep}_t=${Date.now()}`;
-    }
+    // Selalu sertakan cache-buster timestamp unik agar browser & CDN tidak menyajikan file statis lama
+    const sep = url.includes('?') ? '&' : '?';
+    url += `${sep}_t=${Date.now()}`;
     return url;
+  };
+
+  /**
+   * Notifikasi seluruh subscriber (komponen UI) ketika data produk mengalami perubahan
+   */
+  const notifySubscribers = () => {
+    subscribers.forEach(callback => {
+      try {
+        callback(cachedProducts);
+      } catch (err) {
+        console.warn('Error in affiliate subscriber callback:', err);
+      }
+    });
+  };
+
+  /**
+   * Berlangganan perubahan data produk realtime
+   * @param {Function} callback 
+   * @returns {Function} Unsubscribe function
+   */
+  const subscribe = (callback) => {
+    if (typeof callback === 'function') {
+      subscribers.add(callback);
+    }
+    return () => unsubscribe(callback);
+  };
+
+  /**
+   * Batalkan langganan perubahan data
+   * @param {Function} callback 
+   */
+  const unsubscribe = (callback) => {
+    subscribers.delete(callback);
   };
 
   /**
@@ -76,43 +119,24 @@ const AffiliateManager = (() => {
   };
 
   /**
-   * Fetch produk dari JSON terpusat dengan timeout dan fallback cache
+   * Fetch produk dari JSON terpusat secara realtime TANPA CACHE (Murni Network-Only / no-store)
+   * Menggunakan fingerprint untuk mendeteksi perubahan data.
    * @param {boolean} forceRefresh 
-   * @returns {Promise<{success: boolean, products: Array, source: 'network'|'cache'|'empty', message: string}>}
+   * @returns {Promise<{success: boolean, products: Array, changed: boolean, source: 'network'|'memory'|'empty', message: string}>}
    */
   const loadProducts = async (forceRefresh = false) => {
     if (isFetching) {
       return {
         success: true,
         products: cachedProducts,
-        source: 'cache',
-        message: 'Sedang memuat data...'
+        changed: false,
+        source: 'memory',
+        message: 'Sedang memuat data terbaru...'
       };
     }
 
     isFetching = true;
     const url = getActiveJsonUrl(forceRefresh);
-
-    // Periksa cache lokal jika bukan forceRefresh dan belum kadaluarsa
-    if (!forceRefresh && typeof Storage !== 'undefined') {
-      const cached = Storage.getAffiliateCache();
-      const maxAgeMs = (typeof AFFILIATE_CONFIG !== 'undefined' && AFFILIATE_CONFIG.cacheDurationMs) 
-        ? AFFILIATE_CONFIG.cacheDurationMs 
-        : (1000 * 60 * 30);
-      const isExpired = !cached || !cached.timestamp || (Date.now() - cached.timestamp > maxAgeMs);
-
-      if (cached && Array.isArray(cached.products) && cached.products.length > 0 && !isExpired) {
-        cachedProducts = cached.products;
-        lastUpdatedTime = cached.timestamp || Date.now();
-        isFetching = false;
-        return {
-          success: true,
-          products: cachedProducts,
-          source: 'cache',
-          message: 'Data dimuat dari memori lokal (offline-ready)'
-        };
-      }
-    }
 
     try {
       const timeoutMs = (typeof AFFILIATE_CONFIG !== 'undefined' && AFFILIATE_CONFIG.fetchTimeoutMs) || 8000;
@@ -121,8 +145,12 @@ const AffiliateManager = (() => {
 
       const response = await fetch(url, {
         signal: controller.signal,
-        headers: { 'Accept': 'application/json' },
-        cache: forceRefresh ? 'no-cache' : 'default'
+        headers: { 
+          'Accept': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        },
+        cache: 'no-store'
       });
 
       clearTimeout(timeoutId);
@@ -138,46 +166,94 @@ const AffiliateManager = (() => {
         availableCategories = json.categories;
       }
 
+      const newFingerprint = computeFingerprint(validProducts);
+      const hasChanged = (newFingerprint !== lastFingerprint);
+
       cachedProducts = validProducts;
       lastUpdatedTime = Date.now();
+      lastFingerprint = newFingerprint;
+      isFetching = false;
 
-      // Simpan ke storage cache
-      if (typeof Storage !== 'undefined') {
-        Storage.setAffiliateCache(validProducts, lastUpdatedTime);
+      // Jika data berubah (atau baru pertama kali dimuat), beri tahu semua subscriber
+      if (hasChanged) {
+        notifySubscribers();
       }
 
-      isFetching = false;
       return {
         success: true,
         products: validProducts,
+        changed: hasChanged,
         source: 'network',
-        message: 'Data produk berhasil diperbarui dari katalog Shopee'
+        message: 'Data produk berhasil disinkronkan secara realtime'
       };
     } catch (err) {
-      console.warn('Gagal fetch remote affiliate JSON:', err.message);
+      console.warn('Sinkronisasi affiliate JSON gagal:', err.message);
       isFetching = false;
 
-      // Fallback ke cache jika ada
-      if (typeof Storage !== 'undefined') {
-        const cached = Storage.getAffiliateCache();
-        if (cached && Array.isArray(cached.products)) {
-          cachedProducts = cached.products;
-          lastUpdatedTime = cached.timestamp;
-          return {
-            success: true,
-            products: cachedProducts,
-            source: 'cache',
-            message: 'Menggunakan data tersimpan terakhir (koneksi offline/terbatas)'
-          };
-        }
+      // Pertahankan produk yang sudah ada di memori aktif, jangan kosongkan DOM
+      if (cachedProducts && cachedProducts.length > 0) {
+        return {
+          success: true,
+          products: cachedProducts,
+          changed: false,
+          source: 'memory',
+          message: 'Menggunakan data produk aktif di memori'
+        };
       }
 
       return {
         success: false,
         products: [],
+        changed: false,
         source: 'empty',
-        message: 'Tidak dapat memuat data produk dan belum ada data tersimpan di perangkat.'
+        message: 'Tidak dapat memuat data produk Shopee saat ini.'
       };
+    }
+  };
+
+  /**
+   * Menjalankan siklus polling otomatis setiap 30 detik
+   * Menjaga DOM tetap update secara seamless tanpa reload halaman
+   */
+  const startPolling = () => {
+    if (isPollingActive) return;
+    isPollingActive = true;
+
+    const intervalMs = (typeof AFFILIATE_CONFIG !== 'undefined' && AFFILIATE_CONFIG.pollIntervalMs) 
+      ? AFFILIATE_CONFIG.pollIntervalMs 
+      : 30000;
+
+    const runPoll = async () => {
+      // Jangan fetch jika tab sedang diminimize / di latar belakang
+      if (typeof document !== 'undefined' && document.hidden) {
+        return;
+      }
+      await loadProducts(false);
+    };
+
+    if (pollIntervalId) clearInterval(pollIntervalId);
+    pollIntervalId = setInterval(runPoll, intervalMs);
+
+    // Visibility change handler: pause saat tab tidak aktif, resume saat tab aktif
+    if (typeof document !== 'undefined' && !document._affiliateVisibilityBound) {
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && isPollingActive) {
+          // Tab kembali terlihat, segera cek pembaharuan
+          runPoll();
+        }
+      });
+      document._affiliateVisibilityBound = true;
+    }
+  };
+
+  /**
+   * Menghentikan siklus polling
+   */
+  const stopPolling = () => {
+    isPollingActive = false;
+    if (pollIntervalId) {
+      clearInterval(pollIntervalId);
+      pollIntervalId = null;
     }
   };
 
@@ -525,6 +601,10 @@ const AffiliateManager = (() => {
 
   return {
     loadProducts,
+    startPolling,
+    stopPolling,
+    subscribe,
+    unsubscribe,
     filterProducts,
     getContextualRecommendations,
     createProductCard,
@@ -532,7 +612,8 @@ const AffiliateManager = (() => {
     getProducts,
     getCategories,
     getLastUpdated,
-    getActiveJsonUrl
+    getActiveJsonUrl,
+    computeFingerprint
   };
 })();
 

@@ -457,6 +457,45 @@
       assert('Produk dengan deskripsi dan label kosong berhasil dirender tanpa error',
         cardMinimal !== null && cardMinimal.querySelector('.product-title').textContent === 'Mixer Sederhana');
 
+      // ==========================================
+      // GROUP 7: REALTIME NO-CACHE & AUTO-POLLING
+      // ==========================================
+      // Test 66: Storage cache untuk affiliate dinonaktifkan
+      assert('Storage.getAffiliateCache() mengembalikan null (cache affiliate dinonaktifkan)',
+        Storage.getAffiliateCache() === null);
+      
+      // Test 67: Storage set cache affiliate mengembalikan false
+      assert('Storage.setAffiliateCache() mengembalikan false (tidak menulis ke storage)',
+        Storage.setAffiliateCache([], Date.now()) === false);
+
+      // Test 68: URL JSON selalu menyertakan cache buster timestamp
+      const jsonUrl = AffiliateManager.getActiveJsonUrl();
+      assert('AffiliateManager.getActiveJsonUrl() menyertakan parameter timestamp _t=',
+        jsonUrl.includes('_t='));
+
+      // Test 69: computeFingerprint mendeteksi perubahan data produk
+      const fp1 = AffiliateManager.computeFingerprint([actualProd1]);
+      const fp2 = AffiliateManager.computeFingerprint([{ ...actualProd1, price: 99000 }]);
+      assert('computeFingerprint menghasilkan hash berbeda saat data produk berubah',
+        fp1 !== fp2 && fp1.length > 0 && fp2.length > 0);
+
+      // Test 70: Pub/Sub subscriber AffiliateManager berfungsi
+      let subNotified = false;
+      const testUnsub = AffiliateManager.subscribe(() => { subNotified = true; });
+      assert('AffiliateManager.subscribe mengembalikan fungsi unsubscribe',
+        typeof testUnsub === 'function');
+      testUnsub();
+
+      // Test 71: Polling control startPolling & stopPolling
+      assert('AffiliateManager.startPolling dan stopPolling tersedia dan callable',
+        typeof AffiliateManager.startPolling === 'function' && typeof AffiliateManager.stopPolling === 'function');
+
+      // Test 72: Storage Kalkulator (DRAFT & HISTORY) tetap berfungsi 100%
+      Storage.saveDraft({ kalkulator_ok: true });
+      const loadedDraft = Storage.loadDraft();
+      assert('Storage Draft kalkulator tetap berfungsi normal dan tidak terpengaruh no-cache affiliate',
+        loadedDraft && loadedDraft.kalkulator_ok === true);
+
       // Tampilkan Hasil di DOM
       renderSummary();
     }

@@ -3,9 +3,9 @@
  * Dukungan Offline-First untuk kalkulator HPP dan cache produk affiliate
  */
 
-const CACHE_NAME = 'baking-calc-lite-v1.1.0';
+const CACHE_NAME = 'baking-calc-lite-v1.3.0';
 
-// Daftar aset inti yang di-cache saat install
+// Daftar aset inti yang di-cache saat install (AFFILIATE JSON TIDAK DI-CACHE)
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -17,7 +17,6 @@ const CORE_ASSETS = [
   './affiliate-config.js',
   './analytics-config.js',
   './manifest.webmanifest',
-  './data/affiliate-products.json',
   './js/utils.js',
   './js/validation.js',
   './js/storage.js',
@@ -32,7 +31,6 @@ const CORE_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/apple-touch-icon.png',
-  './assets/images/hero-baking-tools.svg',
   './assets/images/placeholder-product.svg'
 ];
 
@@ -70,28 +68,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Jika request JSON affiliate: Network-first dengan fallback ke cache
-  if (url.pathname.endsWith('.json')) {
+  // Khusus request JSON affiliate: MURNI NETWORK ONLY (Tanpa Cache, Tanpa Fallback Cache)
+  if (url.pathname.includes('affiliate-products.json') || url.pathname.endsWith('.json')) {
     event.respondWith(
-      fetch(request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
-            });
-          }
-          return networkResponse;
-        })
-        .catch(() => {
-          return caches.match(request).then((cachedResponse) => {
-            if (cachedResponse) return cachedResponse;
-            // Fallback default response JSON jika cache kosong
-            return new Response(JSON.stringify({ products: [], version: 1 }), {
-              headers: { 'Content-Type': 'application/json' }
-            });
-          });
-        })
+      fetch(request, { cache: 'no-store' })
     );
     return;
   }

@@ -31,8 +31,8 @@ const AFFILIATE_CONFIG = {
   // Timeout fetch dalam milidetik
   fetchTimeoutMs: 8000,
 
-  // Durasi cache lokal (30 menit)
-  cacheDurationMs: 1000 * 60 * 30
+  // Polling interval dalam milidetik (30 detik untuk auto-update realtime tanpa reload)
+  pollIntervalMs: 30000
 };
 
 // Freeze agar tidak dapat dimutasi secara tidak sengaja di runtime

@@ -1285,6 +1285,8 @@ button, input, select, textarea {
   gap: 14px !important;
   padding: 4px 2px 10px 2px !important;
   width: 100% !important;
+  min-height: 200px !important;
+  justify-content: flex-start !important;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
 }

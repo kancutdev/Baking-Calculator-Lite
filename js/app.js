@@ -185,8 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Jalankan kalkulasi pertama
     doCalculate();
 
-    // 7. Muat produk affiliate Shopee secara asynchronous
+    // 7. Muat produk affiliate Shopee secara asynchronous & aktifkan polling realtime tanpa reload
     loadAffiliateRecommendations();
+    if (typeof AffiliateManager !== 'undefined') {
+      AffiliateManager.subscribe(() => {
+        loadAffiliateRecommendations();
+      });
+      AffiliateManager.startPolling();
+    }
 
     // 8. Muat daftar riwayat
     renderHistory();

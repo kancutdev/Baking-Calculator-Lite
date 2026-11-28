@@ -180,6 +180,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Initial Data Load
+  // Initial Data Load & Polling Realtime
   await handleLoadData(false);
+
+  if (typeof AffiliateManager !== 'undefined') {
+    AffiliateManager.subscribe(() => {
+      renderCategoryChips(AffiliateManager.getCategories());
+      renderProductList();
+      updateTimestampUI();
+    });
+    AffiliateManager.startPolling();
+  }
 });

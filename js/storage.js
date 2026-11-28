@@ -29,6 +29,14 @@ const Storage = (() => {
 
   const hasStorage = isLocalStorageAvailable();
 
+  // Bersihkan cache produk affiliate lama dari LocalStorage jika ada (Katalog affiliate kini 100% realtime tanpa cache)
+  try {
+    if (hasStorage) {
+      localStorage.removeItem('bcl_affiliate_cache');
+      localStorage.removeItem('bcl_affiliate_cache_time');
+    }
+  } catch {}
+
   const getItem = (key) => {
     try {
       if (hasStorage) {
@@ -149,32 +157,9 @@ const Storage = (() => {
     return removeItem(KEYS.HISTORY);
   };
 
-  // --- AFFILIATE CACHE METHODS ---
-  const getAffiliateCache = () => {
-    try {
-      const raw = getItem(KEYS.AFFILIATE_CACHE);
-      const timeStr = getItem(KEYS.AFFILIATE_CACHE_TIME);
-      if (!raw) return null;
-      const products = JSON.parse(raw);
-      const timestamp = timeStr ? Number(timeStr) : null;
-      return {
-        products: Array.isArray(products) ? products : [],
-        timestamp
-      };
-    } catch {
-      return null;
-    }
-  };
-
-  const setAffiliateCache = (products, timestamp = Date.now()) => {
-    try {
-      setItem(KEYS.AFFILIATE_CACHE, JSON.stringify(products));
-      setItem(KEYS.AFFILIATE_CACHE_TIME, String(timestamp));
-      return true;
-    } catch {
-      return false;
-    }
-  };
+  // --- AFFILIATE CACHE METHODS (DINONAKTIFKAN: 100% REALTIME DARI SERVER) ---
+  const getAffiliateCache = () => null;
+  const setAffiliateCache = () => false;
 
   return {
     isAvailable: hasStorage,
