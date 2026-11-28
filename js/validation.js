@@ -105,27 +105,45 @@ const Validation = (() => {
 
   /**
    * Validasi URL Shopee
-   * Hanya menerima protokol HTTPS dan domain resmi Shopee
+   * Hanya menerima protokol HTTPS dan domain resmi Shopee beserta subdomainnya
+   * Mendukung: shopee.co.id, s.shopee.co.id, shopee.ee, shope.ee, shp.ee, shopee.com
    * @param {string} url 
    * @returns {boolean}
    */
   const isValidShopeeUrl = (url) => {
     if (!url || typeof url !== 'string') return false;
     const cleanUrl = url.trim();
+    if (!cleanUrl) return false;
 
     try {
       const parsed = new URL(cleanUrl);
-      if (parsed.protocol !== 'https:') return false;
 
-      const validHostPatterns = [
-        /(^|\.)shopee\.co\.id$/i,
-        /(^|\.)shope\.ee$/i,
-        /(^|\.)shopee\.com$/i,
-        /(^|\.)shp\.ee$/i
+      // 1. Wajib protokol HTTPS
+      if (parsed.protocol !== 'https:') {
+        return false;
+      }
+
+      // 2. Normalisasi hostname ke lowercase
+      const hostname = parsed.hostname.toLowerCase();
+      if (!hostname) return false;
+
+      // 3. Whitelist domain dasar resmi Shopee
+      const allowedDomains = [
+        'shopee.co.id',
+        'shopee.ee',
+        'shope.ee',
+        'shp.ee',
+        'shopee.com'
       ];
 
-      return validHostPatterns.some(pattern => pattern.test(parsed.hostname));
+      // 4. Validasi hostname: harus sama persis ATAU merupakan subdomain sah (.domain)
+      const isValidHost = allowedDomains.some(domain => {
+        return hostname === domain || hostname.endsWith('.' + domain);
+      });
+
+      return isValidHost;
     } catch {
+      // Malformed / invalid URL string
       return false;
     }
   };

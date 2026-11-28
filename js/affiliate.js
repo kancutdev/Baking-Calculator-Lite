@@ -46,7 +46,16 @@ const AffiliateManager = (() => {
       if (typeof Validation !== 'undefined') {
         if (!Validation.isValidShopeeUrl(item.shopee_url)) return false;
       } else {
-        if (!item.shopee_url || !item.shopee_url.startsWith('https://')) return false;
+        if (!item.shopee_url || typeof item.shopee_url !== 'string') return false;
+        try {
+          const u = new URL(item.shopee_url.trim());
+          if (u.protocol !== 'https:') return false;
+          const host = u.hostname.toLowerCase();
+          const allowed = ['shopee.co.id', 'shopee.ee', 'shope.ee', 'shp.ee', 'shopee.com'];
+          if (!allowed.some(base => host === base || host.endsWith('.' + base))) return false;
+        } catch {
+          return false;
+        }
       }
 
       return true;
@@ -84,10 +93,15 @@ const AffiliateManager = (() => {
     isFetching = true;
     const url = getActiveJsonUrl(forceRefresh);
 
-    // Periksa cache lokal jika bukan forceRefresh
+    // Periksa cache lokal jika bukan forceRefresh dan belum kadaluarsa
     if (!forceRefresh && typeof Storage !== 'undefined') {
       const cached = Storage.getAffiliateCache();
-      if (cached && Array.isArray(cached.products) && cached.products.length > 0) {
+      const maxAgeMs = (typeof AFFILIATE_CONFIG !== 'undefined' && AFFILIATE_CONFIG.cacheDurationMs) 
+        ? AFFILIATE_CONFIG.cacheDurationMs 
+        : (1000 * 60 * 30);
+      const isExpired = !cached || !cached.timestamp || (Date.now() - cached.timestamp > maxAgeMs);
+
+      if (cached && Array.isArray(cached.products) && cached.products.length > 0 && !isExpired) {
         cachedProducts = cached.products;
         lastUpdatedTime = cached.timestamp || Date.now();
         isFetching = false;
@@ -474,13 +488,15 @@ const AffiliateManager = (() => {
     const metaRow = document.createElement('div');
     metaRow.className = 'thumb-meta-row';
 
-    // Harga hanya jika valid dalam data
+    // Harga jika ada, atau "Cek Harga" jika tidak tersedia di data
+    const priceTag = document.createElement('span');
+    priceTag.className = 'thumb-price';
     if (product.price !== null && typeof product.price === 'number' && product.price > 0 && typeof Utils !== 'undefined') {
-      const priceTag = document.createElement('span');
-      priceTag.className = 'thumb-price';
       priceTag.textContent = Utils.formatRupiah(product.price);
-      metaRow.appendChild(priceTag);
+    } else {
+      priceTag.textContent = 'Cek Harga';
     }
+    metaRow.appendChild(priceTag);
 
     // Indikator Shopee yang halus dan elegan (bukan tombol promosi raksasa)
     const shopeeTag = document.createElement('span');

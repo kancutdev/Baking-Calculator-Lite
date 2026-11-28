@@ -200,20 +200,32 @@
       // ==========================================
       // GROUP 3: VALIDASI & AFFILIATE SHOPEE
       // ==========================================
-      // Uji URL Shopee
-      assert('URL Shopee resmi valid (https://shopee.co.id/product/123)', 
-        Validation.isValidShopeeUrl('https://shopee.co.id/product/123'));
-      assert('URL Shopee shortlink valid (https://shope.ee/abcde)', 
+      // 1. Uji URL Shopee Spesifik
+      assert('Shopee URL s.shopee.co.id/5fqcUMHe4G valid', 
+        Validation.isValidShopeeUrl('https://s.shopee.co.id/5fqcUMHe4G'));
+      assert('Shopee URL s.shopee.co.id/1qdtvSoOZt valid', 
+        Validation.isValidShopeeUrl('https://s.shopee.co.id/1qdtvSoOZt'));
+      assert('Shopee URL root shopee.co.id valid', 
+        Validation.isValidShopeeUrl('https://shopee.co.id/'));
+      assert('Shopee URL shopee.ee/abc123 valid', 
+        Validation.isValidShopeeUrl('https://shopee.ee/abc123'));
+      assert('Shopee URL shp.ee/abc123 valid', 
+        Validation.isValidShopeeUrl('https://shp.ee/abc123'));
+      assert('Shopee URL shope.ee/abcde valid', 
         Validation.isValidShopeeUrl('https://shope.ee/abcde'));
+      assert('URL subdomain jahat evilshopee.co.id.example.com ditolak', 
+        !Validation.isValidShopeeUrl('https://evilshopee.co.id.example.com/'));
+      assert('URL domain jahat shopee.co.id.evil.com ditolak', 
+        !Validation.isValidShopeeUrl('https://shopee.co.id.evil.com/'));
+      assert('URL HTTP ditolak (wajib HTTPS)', 
+        !Validation.isValidShopeeUrl('http://s.shopee.co.id/5fqcUMHe4G') && !Validation.isValidShopeeUrl('http://shopee.co.id/'));
       assert('URL Marketplace lain (Tokopedia/Lazada) ditolak', 
         !Validation.isValidShopeeUrl('https://tokopedia.com/product/123'));
-      assert('URL tanpa HTTPS ditolak', 
-        !Validation.isValidShopeeUrl('http://shopee.co.id/product/123'));
 
       // Uji Produk Affiliate: active=true vs active=false
-      const pActive = { id: '1', name: 'Timbangan', shopee_url: 'https://shopee.co.id/item', active: true };
-      const pInactive = { id: '2', name: 'Mixer', shopee_url: 'https://shopee.co.id/item', active: false };
-      assert('Produk active=true lolos validasi', Validation.validateAffiliateProduct(pActive).isValid);
+      const pActive = { id: '1', name: 'Hand Mixer 7 Speed', shopee_url: 'https://s.shopee.co.id/5fqcUMHe4G', active: true };
+      const pInactive = { id: '2', name: 'Mixer Inactive', shopee_url: 'https://s.shopee.co.id/1qdtvSoOZt', active: false };
+      assert('Produk active=true dengan URL Shopee valid lolos validasi', Validation.validateAffiliateProduct(pActive).isValid);
       assert('Produk active=false ditolak tampil', !Validation.validateAffiliateProduct(pInactive).isValid);
 
       // Uji Produk dengan URL kosong
@@ -425,6 +437,25 @@
       scrollContainer.className = 'affiliate-gallery-scroll';
       assert('Container galeri affiliate menggunakan single-row scroll dengan class .affiliate-gallery-scroll',
         scrollContainer.className.includes('affiliate-gallery-scroll'));
+
+      // Test 63: Verifikasi produk aktual JSON (Hand Mixer 7 Speed & Mixer CDI) lolos validasi
+      const actualProd1 = { id: 'bcl-001', name: 'Hand Mixer 7 Speed', shopee_url: 'https://s.shopee.co.id/5fqcUMHe4G', active: true };
+      const actualProd2 = { id: 'bcl-002', name: 'Mixer CDI', shopee_url: 'https://s.shopee.co.id/1qdtvSoOZt', active: true };
+      assert('Produk aktual Hand Mixer 7 Speed dan Mixer CDI dengan link s.shopee.co.id valid',
+        Validation.validateAffiliateProduct(actualProd1).isValid && Validation.validateAffiliateProduct(actualProd2).isValid);
+
+      // Test 64: Produk valid tanpa harga tetap tampil (menampilkan label Cek Harga)
+      const noPriceProd = { id: 'p-noprice', name: 'Alat Baking Unik', shopee_url: 'https://s.shopee.co.id/5fqcUMHe4G', price: null, active: true };
+      const thumbNoPrice = AffiliateManager.createGalleryThumbnail(noPriceProd);
+      const priceText = thumbNoPrice.querySelector('.thumb-price');
+      assert('Produk tanpa harga tetap tampil dan menampilkan teks Cek Harga pada thumbnail',
+        priceText !== null && priceText.textContent === 'Cek Harga');
+
+      // Test 65: Produk dengan deskripsi kosong dan label kosong tetap valid dan tampil
+      const minimalProd = { id: 'p-minimal', name: 'Mixer Sederhana', description: '', label: '', shopee_url: 'https://s.shopee.co.id/1qdtvSoOZt', active: true };
+      const cardMinimal = AffiliateManager.createProductCard(minimalProd);
+      assert('Produk dengan deskripsi dan label kosong berhasil dirender tanpa error',
+        cardMinimal !== null && cardMinimal.querySelector('.product-title').textContent === 'Mixer Sederhana');
 
       // Tampilkan Hasil di DOM
       renderSummary();
